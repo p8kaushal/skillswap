@@ -1,7 +1,10 @@
 {
   "name": "skillswap",
   "version": "0.0.1",
-  "author": {"name": "Parth Kaushal", "email": "parth.kaushal.007@gmail.com"},
+  "author": {
+    "name": "Parth Kaushal",
+    "email": "parth.kaushal.007@gmail.com"
+  },
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -12,19 +15,20 @@
   },
   "dependencies": {
     "@nuxt/eslint": "^1.9.0",
-    "@prisma/client": "^7.0.0",
+    "@nuxt/ui": "^4.2.1",
     "@prisma/adapter-pg": "^7.0.0",
+    "@prisma/client": "^7.0.0",
     "eslint": "^9.0.0",
     "nuxt": "^4.1.2",
+    "pg": "^8.16.3",
     "vue": "^3.5.22",
-    "vue-router": "^4.5.1",
-    "pg": "^8.16.3"
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@types/node": "^24.6.1",
+    "@types/pg": "^8.15.6",
     "dotenv": "^17.2.1",
     "prisma": "^7.0.0",
-    "tsx": "^4.20.6",
-    "@types/pg": "^8.15.6"
+    "tsx": "^4.20.6"
   }
 }

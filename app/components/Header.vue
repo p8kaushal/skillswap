@@ -1,12 +1,12 @@
 <template>
   <nav>
     <div class="left">
-      <NuxtLink to="/"> Blog </NuxtLink>
-      <NuxtLink to="/drafts">Drafts</NuxtLink>
+      <NuxtLink to="/"> Home </NuxtLink>
+      <NuxtLink to="/traits">Traits</NuxtLink>
     </div>
     <div class="right">
       <NuxtLink to="/signup">Signup</NuxtLink>
-      <NuxtLink to="/create">+ Create draft</NuxtLink>
+      <NuxtLink to="/create">+ Create skill</NuxtLink>
     </div>
   </nav>
 </template>

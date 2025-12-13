@@ -1,14 +1,14 @@
 <template>
   <div class="page">
-    <h1>My Skills</h1>
+    <h1>Traits</h1>
     <main>
       <p v-if="pending">
         <span class="loading"></span>
-        Loading skills...
+        Loading Traits...
       </p>
-      <p v-else-if="error">Error while fetching skills 💔</p>
+      <p v-else-if="error">Error while fetching Traits 💔</p>
       <div v-else>
-        <Skill class="skill" v-for="skill in feed" :key="skill.id" :skill="skill" />
+        <Trait class="trait" v-for="trait in feed" :key="trait.id" :trait="trait" />
       </div>
     </main>
   </div>
@@ -18,7 +18,7 @@
   let feed = ref([]);
 
   const { pending, error } = await useLazyAsyncData(async () => {
-    const getFeed = await fetch(`/feed`).then((res) =>
+    const getFeed = await fetch(`/trait`).then((res) =>
       res.json()
     )
 
@@ -27,17 +27,17 @@
 </script>
 
 <style>
-  .skill {
+  .trait {
     background: white;
     transition: box-shadow 0.1s ease-in;
   }
 
-  .skill:hover {
+  .trait:hover {
     box-shadow: 1px 1px 3px #aaa;
   }
 
-  .skill,
-  .skill {
+  .trait,
+  .trait {
     margin-top: 2rem;
   }
 </style>

@@ -2,13 +2,8 @@ import { prisma } from '../../prisma/db'
 
 // https://nuxt.com/docs/guide/directory-structure/server
 export default defineEventHandler(async (event) => {
-    const feed = await prisma.skill.findMany({
-        where: { 
-            status: 'ACTIVE'
-        },
-        include: {
-            person: true
-        }
+    const feed = await prisma.trait.findMany({
+        
     })
     .catch((error) => {
         console.error(error);
