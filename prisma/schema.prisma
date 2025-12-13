@@ -1,0 +1,75 @@
+generator client {
+  provider   = "prisma-client"
+  output     = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Person {
+  id    Int     @id @default(autoincrement())
+  name  String?
+  email String  @unique
+  phone String?
+  address String?
+  url  String?
+  description String?
+  status  String
+  skills Skill[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Trait {
+  id        Int      @id @default(autoincrement())
+  name     String
+  description String?
+  skills   Skill[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Skill {
+  id        Int      @id @default(autoincrement())
+  level     String  // e.g., "beginner", "intermediate", "expert"...tbd
+  status    String // e.g., "has", "want"
+  description      String?
+  trait  Trait?    @relation(fields: [traitId], references: [id])
+  traitId  Int?
+  person    Person?    @relation(fields: [personId], references: [id])
+  personId  Int?
+  skillAMatches Match[] @relation("SkillAMatches")
+  skillBMatches Match[] @relation("SkillBMatches")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Match {
+  id        Int      @id @default(autoincrement())
+  skillA   Skill    @relation("SkillAMatches", fields: [skillAId], references: [id])
+  skillAId  Int
+  skillB   Skill?    @relation("SkillBMatches", fields: [skillBId], references: [id])
+  skillBId  Int?
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+  status     String
+  sessionsA Session[] @relation("SessionA")
+  sessionsB Session[] @relation("SessionB")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id      Int      @id @default(autoincrement())
+  title   String
+  description String?
+  url String
+  scheduledAt DateTime
+  duration Int // duration in minutes
+  status   String
+  matchA Match[]    @relation("SessionA")
+  matchB Match[]    @relation("SessionB")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
