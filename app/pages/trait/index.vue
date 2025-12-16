@@ -1,5 +1,11 @@
 <template>
   <div class="page">
+  <nav>
+    <div class="left"></div>
+    <div class="right">
+      <NuxtLink to="/trait/create">Create Trait</NuxtLink>
+    </div>
+  </nav>
     <h1>Traits</h1>
     <main>
       <p v-if="pending">
@@ -8,21 +14,21 @@
       </p>
       <p v-else-if="error">Error while fetching Traits 💔</p>
       <div v-else>
-        <Trait class="trait" v-for="trait in feed" :key="trait.id" :trait="trait" />
+        <Trait class="trait" v-for="trait in traits" :key="trait.id" :trait="trait" />
       </div>
     </main>
   </div>
 </template>
 
 <script setup>
-  let feed = ref([]);
+  let traits = ref([]);
 
   const { pending, error } = await useLazyAsyncData(async () => {
     const getFeed = await fetch(`/trait`).then((res) =>
       res.json()
     )
 
-    feed.value = getFeed;
+    traits.value = getFeed;
   }, { server: false });
 </script>
 

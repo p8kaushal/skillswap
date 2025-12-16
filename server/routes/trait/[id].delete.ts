@@ -4,7 +4,7 @@ import { prisma } from '../../../prisma/db'
 export default defineEventHandler(async (event) => {
     const id = event.context.params.id;
 
-    const deletePost = await prisma.post.delete({
+    const deleteTrait = await prisma.trait.delete({
         where: {
             //@ts-ignore
             id: parseInt(id)
@@ -14,5 +14,5 @@ export default defineEventHandler(async (event) => {
         console.error(error);
     });
 
-    return deletePost;
+    return deleteTrait;
 });

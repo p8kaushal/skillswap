@@ -1,7 +1,7 @@
 <template>
   <div @click="navigate(trait)">
     <h2>{{ trait.name }}</h2>
-    <small v-if="trait.description">By {{ trait.description }}</small>
+    <small v-if="trait.description">{{ trait.description }}</small>
     <small v-else>No description</small>
     <p v-html="trait.updatedAt"></p>
   </div>
@@ -18,7 +18,7 @@
   })
   
   const navigate = (trait) => {
-    router.push(`/p/${trait.id}`);
+    router.push(`/trait/${trait.id}`);
   }
 </script>
 

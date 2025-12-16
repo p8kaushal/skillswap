@@ -1,30 +1,10 @@
 <template>
   <div class="page">
-    <h1>My Skills</h1>
-    <main>
-      <p v-if="pending">
-        <span class="loading"></span>
-        Loading skills...
-      </p>
-      <p v-else-if="error">Error while fetching skills 💔</p>
-      <div v-else>
-        <Skill class="skill" v-for="skill in feed" :key="skill.id" :skill="skill" />
-      </div>
-    </main>
+    <h1>Welcome to Skill Swap platform</h1>
   </div>
 </template>
 
-<script setup>
-  let feed = ref([]);
-
-  const { pending, error } = await useLazyAsyncData(async () => {
-    const getFeed = await fetch(`/feed`).then((res) =>
-      res.json()
-    )
-
-    feed.value = getFeed;
-  }, { server: false });
-</script>
+<script setup></script>
 
 <style>
   .skill {

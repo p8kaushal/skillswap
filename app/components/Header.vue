@@ -2,11 +2,11 @@
   <nav>
     <div class="left">
       <NuxtLink to="/"> Home </NuxtLink>
-      <NuxtLink to="/traits">Traits</NuxtLink>
+      <NuxtLink to="/person">Person</NuxtLink>      
+      <NuxtLink to="/trait">Trait</NuxtLink>
     </div>
     <div class="right">
       <NuxtLink to="/signup">Signup</NuxtLink>
-      <NuxtLink to="/create">+ Create skill</NuxtLink>
     </div>
   </nav>
 </template>
