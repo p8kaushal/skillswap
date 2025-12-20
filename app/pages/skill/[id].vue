@@ -5,54 +5,41 @@
     </p>
     <p v-else-if="error">Error while fetching feed 💔</p>
     <main v-else>
-      <h2>{{ article.title }} ({{ article.published ? 'Published' : 'Draft' }})</h2>
-      <p v-if="article.author">By {{ article.author.name }}</p>
-      <p v-else>Unknown author</p>
-      <div v-html="article.content"></div>
+      <h2>{{ skill.trait.name }}</h2>
+      <div v-html="skill.description"></div>
       <div class="btn-wrapper">
-        <button @click="publish(article.id)" v-if="!article.published">Publish</button>
-        <button @click="destroy(article.id)">Delete</button>
+        <button @click="destroy(skill.id)">Delete</button>
       </div>
     </main>
   </div>
 </template>
+
 <script setup>
-  let article = ref({});
+  let skill = ref({});
  
   const router = useRouter();
   const { params: { id } } = useRoute();
  
-  const { pending, error, refresh } = await useLazyAsyncData('article', async () => {
-    let getArticles = await fetch(`/post/${ id }`, {
+  const { pending, error, refresh } = await useLazyAsyncData('skill', async () => {
+    let getskills = await fetch(`/skill/${ id }`, {
       method: 'GET' 
     }).then(res => res.json());
 
-    article.value = getArticles;
+    skill.value = getskills;
   }, { server: false }); 
  
   const destroy = async (id) => {  
-    await fetch(`/post/${id}`, {
+    await fetch(`/skill/${id}`, {
       method: 'DELETE',
     })
     .then(()=>{
-      router.push('/');
+      router.push('/skill');
     })
     .catch((error)=>{
       console.error(error);
     });
   }
-    
-  const publish = async (id) => {
-    await fetch(`/publish/${id}`, {
-      method: 'PUT',
-    })  
-    .then(()=>{
-      router.push('/');
-    })
-    .catch((error)=>{
-      console.error(error);
-    });
-  }
+
 </script>
 
 <style scoped>

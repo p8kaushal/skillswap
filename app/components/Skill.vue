@@ -1,9 +1,9 @@
 <template>
   <div @click="navigate(skill)">
-    <h2>{{ skill.trait }}</h2>
-    <small v-if="skill.person">By {{ skill.person.name }}</small>
-    <small v-else>Of unknown person</small>
-    <p v-html="skill.content"></p>
+    <h1>{{ skill.trait.name }}</h1>
+    <small>Level {{ skill.level }}</small>
+    <small>Status {{ skill.status }}</small>
+    <p v-html="skill.description"></p>
   </div>
 </template>
 
@@ -18,7 +18,7 @@
   })
   
   const navigate = (skill) => {
-    router.push(`/p/${skill.id}`);
+    router.push(`/skill/${skill.id}`);
   }
 </script>
 

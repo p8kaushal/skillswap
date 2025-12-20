@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
             id: parseInt(id) 
         },
         include: { 
-            person: true
+            person: true,
+            trait: true
         } 
     })
     .catch((error) => {
