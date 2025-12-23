@@ -1,60 +1,58 @@
-<template>
-    <!-- @to-do make the footer appear at the bottom of the page always -->
-    <footer class="app-footer" role="contentinfo" aria-label="Footer">
-        <div class="container">
-            <span class="copyright">© {{ year }} SkillSwap. All rights reserved.</span>
-            <nav class="contact" aria-label="Contact">
-                <a class="contact-link" href="mailto:hello@skillswap.example" rel="noopener">hello@skillswap.example</a>
-                <span class="divider" aria-hidden="true">·</span>
-                <a class="contact-link" href="tel:+10000000000">+1 (000) 000-0000</a>
-            </nav>
-        </div>
-    </footer>
-</template>
+<script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
 
-<script setup>
-const year = new Date().getFullYear()
+const items: NavigationMenuItem[] = [
+  {
+    label: 'Figma Kit',
+    to: 'https://go.nuxt.com/figma-ui',
+    target: '_blank'
+  },
+  {
+    label: 'Playground',
+    to: 'https://stackblitz.com/edit/nuxt-ui',
+    target: '_blank'
+  },
+  {
+    label: 'Releases',
+    to: 'https://github.com/nuxt/ui/releases',
+    target: '_blank'
+  }
+]
 </script>
 
-<style scoped>
-.app-footer {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: #f8f9fb;
-    color: #333;
-    border-top: 1px solid #e6e9ee;
-}
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-.contact {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.95rem;
-}
-.contact-link {
-    color: #0366d6;
-    text-decoration: none;
-}
-.contact-link:hover,
-.contact-link:focus {
-    text-decoration: underline;
-}
-.divider {
-    color: #999;
-    margin: 0 6px;
-}
-@media (max-width: 560px) {
-    .container {
-        flex-direction: column;
-        text-align: center;
-    }
-    .divider { display: none; }
-}
-</style>
+<template>
+  <UFooter>
+    <template #left>
+      <p class="text-muted text-sm">Copyright © {{ new Date().getFullYear() }}</p>
+    </template>
+
+    <UNavigationMenu :items="items" variant="link" />
+
+    <template #right>
+      <UButton
+        icon="i-simple-icons-discord"
+        color="neutral"
+        variant="ghost"
+        to="https://go.nuxt.com/discord"
+        target="_blank"
+        aria-label="Discord"
+      />
+      <UButton
+        icon="i-simple-icons-x"
+        color="neutral"
+        variant="ghost"
+        to="https://go.nuxt.com/x"
+        target="_blank"
+        aria-label="X"
+      />
+      <UButton
+        icon="i-simple-icons-github"
+        color="neutral"
+        variant="ghost"
+        to="https://github.com/nuxt/nuxt"
+        target="_blank"
+        aria-label="GitHub"
+      />
+    </template>
+  </UFooter>
+</template>

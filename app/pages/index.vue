@@ -1,23 +1,32 @@
+<script setup lang="ts">
+const links = ref([
+  {
+    label: 'Sign up',
+    color: 'neutral',
+    to: '/signup',
+  },
+  {
+    label: 'Learn more',
+    color: 'neutral',
+    variant: 'subtle',
+    trailingIcon: 'i-lucide-arrow-right'
+  }
+])
+</script>
+
 <template>
-  <div class="page">
-    <h1>Welcome to Skill Swap platform</h1>
-  </div>
+  <UPageCTA
+    title="Swill Swap"
+    description="Learn new skills by teaching your own skills to others."
+    orientation="horizontal"
+    :links="links"
+  >
+    <img
+      src="https://picsum.photos/640/728"
+      width="320"
+      height="364"
+      alt="Illustration"
+      class="w-full rounded-lg"
+    />
+  </UPageCTA>
 </template>
-
-<script setup></script>
-
-<style>
-  .skill {
-    background: white;
-    transition: box-shadow 0.1s ease-in;
-  }
-
-  .skill:hover {
-    box-shadow: 1px 1px 3px #aaa;
-  }
-
-  .skill,
-  .skill {
-    margin-top: 2rem;
-  }
-</style>

@@ -1,8 +1,13 @@
 <template>
-    <main>  
-      <NuxtLayout name="default">
-        <NuxtPage/>
+  <UApp>
+    <Header />
+
+    <UMain>
+      <NuxtLayout>
+        <NuxtPage />
       </NuxtLayout>
-    </main>
+    </UMain>
+
+    <Footer />
+  </UApp>
 </template>
-  
