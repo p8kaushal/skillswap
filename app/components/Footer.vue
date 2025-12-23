@@ -33,7 +33,7 @@ const items: NavigationMenuItem[] = [
         icon="i-simple-icons-discord"
         color="neutral"
         variant="ghost"
-        to="https://go.nuxt.com/discord"
+        to="https://discord.gg"
         target="_blank"
         aria-label="Discord"
       />
@@ -41,7 +41,7 @@ const items: NavigationMenuItem[] = [
         icon="i-simple-icons-x"
         color="neutral"
         variant="ghost"
-        to="https://go.nuxt.com/x"
+        to="https://x.com"
         target="_blank"
         aria-label="X"
       />
@@ -49,7 +49,7 @@ const items: NavigationMenuItem[] = [
         icon="i-simple-icons-github"
         color="neutral"
         variant="ghost"
-        to="https://github.com/nuxt/nuxt"
+        to="https://github.com/p8kaushal"
         target="_blank"
         aria-label="GitHub"
       />
