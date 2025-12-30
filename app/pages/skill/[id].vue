@@ -1,17 +1,30 @@
 <template>
-  <div>
-    <p v-if="pending">
-      <span class="loading"></span>
-    </p>
-    <p v-else-if="error">Error while fetching feed 💔</p>
-    <main v-else>
-      <h2>{{ skill.trait.name }}</h2>
-      <div v-html="skill.description"></div>
-      <div class="btn-wrapper">
-        <button @click="destroy(skill.id)">Delete</button>
+  <UCard class="max-w-2xl">
+    <template #header>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <UButton 
+            color="gray" 
+            variant="ghost" 
+            icon="i-lucide-arrow-left"
+            :to="`/person/${skill?.person?.id}`"
+          >
+            Back
+          </UButton>
+          <h1 class="text-2xl font-bold">{{ skill?.trait?.name }}</h1>
+        </div>
+        <UButton color="red" @click="destroy(skill.id)" icon="i-heroicons-trash">
+          Delete Skill
+        </UButton>
       </div>
-    </main>
-  </div>
+    </template>
+
+    <div class="space-y-4 p-6">
+      <p class="text-lg">{{ skill.description }}</p>
+      <p><strong>Level:</strong> {{ skill.level }}</p>
+      <p><strong>Status:</strong> {{ skill.status }}</p>
+    </div>
+  </UCard>
 </template>
 
 <script setup>
@@ -33,7 +46,7 @@
       method: 'DELETE',
     })
     .then(()=>{
-      router.push('/skill');
+      router.push('/person/' + skill.value.person.id);
     })
     .catch((error)=>{
       console.error(error);
@@ -41,33 +54,3 @@
   }
 
 </script>
-
-<style scoped>
-  .page {
-    background: white;
-    padding: 2rem;
-  }
-
-  .actions {
-    margin-top: 2rem;
-  }
-
-  button {
-    margin: 0.5rem;
-    background: #ececec;
-    border: 1px black solid;
-    border-radius: 0.125rem;
-    padding: 1rem 2rem;
-  }
-
-  button button {
-    margin-left: 1rem;
-  }
-
-  .btn-wrapper {
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-    margin-top: 1rem;
-  }
-</style>
