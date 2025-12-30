@@ -4,17 +4,23 @@ import { prisma } from '../../../prisma/db'
 export default defineEventHandler(async (event) => {
     console.log("Fetching person by ID");
     const { context: { params: { id } } } = event;
-   
+
     const getPerson = await prisma.person.findUnique({
         where: {
             //@ts-ignore
-            id: parseInt(id) 
+            id: parseInt(id)
         },
-        } 
-    )
-    .catch((error) => {
-        console.error(error);
-    });
+        include: {
+            skills: {
+                include: {
+                    trait: true
+                }
+            }
+        }
+    })
+        .catch((error) => {
+            console.error(error);
+        });
 
     console.log("Fetched person:", getPerson);
     return getPerson;

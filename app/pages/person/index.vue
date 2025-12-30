@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  console.log('person index page')
 import type { TableColumn, TableRow } from '@nuxt/ui'
 
 interface Person {

@@ -1,26 +1,19 @@
-<template>
-  <div>
-    <p v-if="pending">
-      <span class="loading"></span>
-    </p>
-    <p v-else-if="error">Error while fetching feed 💔</p>
-    <main v-else>
-      <h1>{{ person.name }}</h1>
-      <div v-html="person.description"></div>
-      <div class="btn-wrapper">
-        <button @click="destroy(person.id)">Delete</button>
-        <NuxtLink :to="`/skill/create?id=${ person.id }`">Create Skill</NuxtLink>
-      </div>
-      <div>
-        <Skill class="person" v-for="skill in skills" :key="skill.id" :skill="skill" />
-      </div>
-    </main>
-  </div>
-</template>
+<script setup lang="ts">
+    console.log('person detail page')
+import type { TableColumn, TableRow } from '@nuxt/ui'
+import { success } from 'zod'
 
-<script setup>
-  let person = ref({});
-  let skills = ref([]);
+interface Skill {
+  id: string
+  name: string
+  level: string
+  status: 'Willing' | 'Not Willing'
+  description: string
+  createdAt: string
+  updatedAt: string
+}  
+let person = ref({});
+let skills = ref([]);
  
   const router = useRouter();
   const { params: { id } } = useRoute();
@@ -32,15 +25,6 @@
 
     person.value = getpersons;
   }, { server: false }); 
-
-  const { pending: pendingSkills, error: errorSkills } = await useLazyAsyncData(async () => {
-    const getSkill = await fetch(`/skill?id=${id}`).then((res) =>
-      res.json()
-    )
-
-    skills.value = getSkill;
-    console.log(skills.value);
-  }, { server: false });
  
   const destroy = async (id) => {  
     await fetch(`/person/${id}`, {
@@ -54,34 +38,151 @@
     });
   }
 
+const columns: ColumnDef<Skill>[] = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+    meta: {
+      class: {
+        th: 'text-center font-semibold',
+        td: 'text-center font-mono'
+      }
+    }
+  },
+  {
+    accessorKey: 'trait.name',
+    header: 'Trait Name',
+    meta: {
+      class: {
+        th: 'text-left',
+        td: 'text-left'
+      }
+    }
+  },  
+  {
+    accessorKey: 'level',
+    header: 'Level',
+    meta: {
+      class: {
+        th: 'text-left',
+        td: 'text-left'
+      }
+    }
+  },  
+  {
+    accessorKey: 'description',
+    header: 'Description',
+    meta: {
+      class: {
+        th: 'text-left',
+        td: 'text-left'
+      }
+    }
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    meta: {
+      class: {
+        th: 'text-center',
+        td: 'text-center'
+      }
+    },
+    cell: ({ row }) => {
+      const status = row.getValue('status') as string
+      const colorMap = {
+        WILLING: 'text-success',
+        NOT_WILLING: 'text-error'
+      }
+      return h(
+        'span',
+        {
+          class: `font-semibold capitalize ${colorMap[status as keyof typeof colorMap]}`
+        },
+        status
+      )
+    }
+  },  
+  {
+    accessorKey: 'createdAt',
+    header: 'Created At',
+    cell: ({ row }) => {
+      return new Date(row.getValue('createdAt')).toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    }
+  },
+  {
+    accessorKey: 'updatedAt',
+    header: 'Updated At',
+    cell: ({ row }) => {
+      return new Date(row.getValue('updatedAt')).toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    }
+  },  
+]  
+
+// handle row click via @select event
+function handleRowSelect(_event: Event, row: TableRow<Skill>) {
+  navigateTo({
+    name: 'skill-id',
+    params: { id: row.original.id }
+  })
+}
+
 </script>
 
-<style scoped>
-  .page {
-    background: white;
-    padding: 2rem;
-  }
-
-  .actions {
-    margin-top: 2rem;
-  }
-
-  button {
-    margin: 0.5rem;
-    background: #ececec;
-    border: 1px black solid;
-    border-radius: 0.125rem;
-    padding: 1rem 2rem;
-  }
-
-  button button {
-    margin-left: 1rem;
-  }
-
-  .btn-wrapper {
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-    margin-top: 1rem;
-  }
-</style>
+<template>
+  <div class="pt-6">
+    <h1 class="text-center text-lg font-bold text-highlighted">
+      Skill
+    </h1>
+  </div>
+  <main>
+    <p v-if="pending">
+      <span class="loading"></span>
+      Loading Skill...
+    </p>
+    <p v-else-if="error">Error while fetching Skill 💔</p>
+    <div v-else>
+      <UTable
+        :loading="pending"
+        loading-color="primary"
+        loading-animation="carousel"
+        :data="person.skills || []"
+        :columns="columns"
+        class="w-full"
+        :ui="{
+          wrapper: { base: 'max-h-[500px] overflow-y-auto' },
+          th: { base: 'sticky top-0 bg-white dark:bg-gray-900 z-10' }
+        }"
+        @select="handleRowSelect"        
+      />
+    </div>
+    <div class="flex gap-3 mt-6">
+    <UButton
+        color="error"
+        variant="solid"
+        icon="i-heroicons-trash"
+        @click="destroy(person.id)"
+    >
+        Delete Person
+    </UButton>
+    <UButton
+        color="success"
+        variant="solid"
+        icon="i-heroicons-plus"
+        :to="`/skill/create?id=${ person.id }`"
+    >
+        Create Skill
+    </UButton>
+    </div>
+  </main>
+</template>
