@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import type { ColumnDef } from '@tanstack/vue-table' 
+  console.log('person index page')
+import type { TableColumn, TableRow } from '@nuxt/ui'
 
 interface Person {
   id: string
@@ -156,6 +157,15 @@ const columns: ColumnDef<Person>[] = [
     }
   },  
 ]  
+
+// handle row click via @select event
+function handleRowSelect(_event: Event, row: TableRow<Person>) {
+  navigateTo({
+    name: 'person-id',
+    params: { id: row.original.id }
+  })
+}
+
 </script>
 
 <template>
@@ -182,6 +192,7 @@ const columns: ColumnDef<Person>[] = [
           wrapper: { base: 'max-h-[500px] overflow-y-auto' },
           th: { base: 'sticky top-0 bg-white dark:bg-gray-900 z-10' }
         }"
+        @select="handleRowSelect"
       />
     </div>
   </main>
