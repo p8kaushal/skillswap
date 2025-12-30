@@ -24,7 +24,7 @@ const state = reactive<PersonFormState>({
 const toast = useToast() // if you use Nuxt UI toast; otherwise remove
 const router = useRouter()
 
-async function onSubmit (event: FormSubmitEvent<PersonFormState>) {
+async function onSubmit(event: FormSubmitEvent<PersonFormState>) {
   try {
     await $fetch('/person', {
       method: 'POST',
@@ -64,13 +64,10 @@ async function onSubmit (event: FormSubmitEvent<PersonFormState>) {
       </UFormField>
 
       <UFormField label="Status" name="status">
-        <USelect
-          v-model="state.status"
-          :items="[
-            { label: 'Active', value: 'ACTIVE' },
-            { label: 'Inactive', value: 'INACTIVE' }
-          ]"
-        />
+        <USelect v-model="state.status" :items="[
+          { label: 'Active', value: 'ACTIVE' },
+          { label: 'Inactive', value: 'INACTIVE' }
+        ]" />
       </UFormField>
 
       <UFormField label="Phone number" name="phone">
@@ -84,6 +81,9 @@ async function onSubmit (event: FormSubmitEvent<PersonFormState>) {
       <div class="pt-2">
         <UButton type="submit" color="primary" block>
           Submit
+        </UButton>
+        <UButton color="primary" variant="outline" block to="/person">
+          Cancel
         </UButton>
       </div>
     </UForm>

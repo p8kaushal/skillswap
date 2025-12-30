@@ -1,98 +1,79 @@
-<template>
-  <div>
-    <form @submit="createSkill">
-      <h1>Create Skill</h1>
-      Trait <select v-model="traitId">
-        <option v-for="trait in traits" :key="trait.id" :value="trait.id">
-          {{ trait.name }}
-        </option>
-      </select>
-      <textarea cols="50" placeholder="Description" rows="8" v-model="description" />
-      <input autoFocus placeholder="Level" type="text" v-model="level" />
-      <input autoFocus placeholder="Status" type="text" v-model="status" />
-      <input :class="{'primary': traitId}" v-bind="{'disabled': !traitId}" type="submit" value="Create" />
-      <NuxtLink class="back" to="/"> or Cancel </NuxtLink>
-    </form>
-  </div>
-</template>
-<script setup>
-  const router = useRouter();
-  const route = useRoute();
+<script setup lang="ts">
+import type { FormSubmitEvent } from '@nuxt/ui'
 
-  let traits = ref([]);
-  let traitId = ref();
-  let description = ref();
-  let level = ref();
-  let status = ref();
-  let isLoading = ref(false);
+type PersonFormState = {
+    name: string
+    description: string
+    level: string
+    status: 'WILLING' | 'NOT WILLING' | string
+}
 
-    const { pending: pendingTraits, error: errorTraits } = await useLazyAsyncData(async () => {
-        const getTraits = await fetch(`/trait`).then((res) =>
-        res.json()
-        )
-    
-        traits.value = getTraits;
-        console.log(traits.value);
-    }, { server: false });
+const state = reactive<PersonFormState>({
+    name: '',
+    description: '',
+    level: '',
+    status: ''
+})
 
-  const createSkill = async (e) => {
-    e.preventDefault()
-    const body = {
-        personId: route.query.id,  //getting personId from query param
-      traitId: traitId.value, //@to-do ideally should be from a dropdown
-      description: description.value,
-      level: level.value,
-      status: status.value,
+const toast = useToast() // if you use Nuxt UI toast; otherwise remove
+const router = useRouter()
+let traits = ref([]);
+let traitId = ref();
+let description = ref();
+let level = ref();
+let status = ref();
+
+async function onSubmit(event: FormSubmitEvent<PersonFormState>) {
+    try {
+        await $fetch('/skill', {
+            method: 'POST',
+            body: event.data
+        })
+
+        toast.add?.({ title: 'Skill created', color: 'success' })
+        router.push('/skill') // or wherever your list page is
+    } catch (error) {
+        console.error(error)
+        toast.add?.({ title: 'Failed to create skill', color: 'error' })
     }
-    
-
-    await fetch(`/skill`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    })
-    .then(()=>{
-      router.push({ name: 'person' })
-    })
-    .catch((error)=>{
-      console.error(error);
-    })
-    }
+}
 </script>
-<style scoped>
-  .page {
-    background: white;
-    padding: 3rem;
-    display: flex;
-    justify-description: center;
-    align-items: center;
-  }
 
-  input[type='text'],
-  textarea {
-    width: 100%;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border-radius: 0.25rem;
-    border: 0.125rem solid rgba(0, 0, 0, 0.2);
-  }
+<template>
+    <UContainer class="py-10 max-w-2xl">
+        <h1 class="text-center text-lg font-semibold mb-6">
+            Create skill
+        </h1>
+        <UForm :state="state" class="space-y-4" @submit="onSubmit">
+            <!-- @to-do: dropdown to select trait -->
+            <UFormGroup label="Trait" required>
+                <USelect v-model="traitId" :options="traits" value-attribute="id" option-attribute="name"
+                    placeholder="Select a trait" searchable />
+            </UFormGroup>
 
-  input[type='submit'] {
-    background: #ececec;
-    border: 0;
-    padding: 1rem 2rem;
-  }
+            <UFormField label="Description" name="description">
+                <UTextarea v-model="state.description" :rows="3" />
+            </UFormField>
 
-  .back {
-    margin-left: 1rem;
-  }
+            <UFormField label="Level" name="level">
+                <UInput v-model="state.level" placeholder="Beginner" />
+            </UFormField>
 
-  span {
-    color: red;
-  }
+            <UFormField label="Status" name="status">
+                <USelect v-model="state.status" :items="[
+                    { label: 'Willing', value: 'WILLING' },
+                    { label: 'Not willing', value: 'NOT WILLING' }
+                ]" />
+            </UFormField>
 
-  .primary {
-    background: blue !important;
-    color: white;
-  }
-</style>
+            <div class="pt-2">
+                <UButton type="submit" color="primary" block>
+                    Submit
+                </UButton>
+                <UButton color="primary" variant="outline" block to="/person">
+                    Cancel (@to-do: it should go to person detail page)
+                </UButton>
+            </div>
+        </UForm>
+    </UContainer>
+</template>

@@ -1,20 +1,15 @@
-<template>
-  <div>
-    <p v-if="pending">
-      <span class="loading"></span>
-    </p>
-    <p v-else-if="error">Error while fetching feed 💔</p>
-    <main v-else>
-      <h2>{{ trait.name }}</h2>
-      <div v-html="trait.description"></div>
-      <div class="btn-wrapper">
-        <button @click="destroy(trait.id)">Delete</button>
-      </div>
-    </main>
-  </div>
-</template>
+<script setup lang="ts">
+console.log('trait detail page')
+import type { TableColumn, TableRow } from '@nuxt/ui'
+import { success } from 'zod'
 
-<script setup>
+interface Trait {
+  id: string
+  name: string
+  description: string
+  createdAt: string
+  updatedAt: string
+}  
   let trait = ref({});
  
   const router = useRouter();
@@ -42,32 +37,31 @@
 
 </script>
 
-<style scoped>
-  .page {
-    background: white;
-    padding: 2rem;
-  }
+<template>
+  <UCard class="max-w-2xl">
+    <template #header>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <UButton 
+            color="gray" 
+            variant="ghost" 
+            icon="i-lucide-arrow-left"
+            :to="`/trait/`"
+          >
+            Back
+          </UButton>
+          <h1 class="text-2xl font-bold">{{ trait?.name }}</h1>
+        </div>
+        <UButton color="red" @click="destroy(trait.id)" icon="i-heroicons-trash">
+          Delete Trait
+        </UButton>
+      </div>
+    </template>
 
-  .actions {
-    margin-top: 2rem;
-  }
-
-  button {
-    margin: 0.5rem;
-    background: #ececec;
-    border: 1px black solid;
-    border-radius: 0.125rem;
-    padding: 1rem 2rem;
-  }
-
-  button button {
-    margin-left: 1rem;
-  }
-
-  .btn-wrapper {
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-    margin-top: 1rem;
-  }
-</style>
+    <div class="space-y-4 p-6">
+      <p class="text-lg">{{ trait.description }}</p>
+      <p><strong>Created At:</strong> {{ new Date(trait.createdAt).toLocaleString('en-US', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }}</p>
+      <p><strong>Updated At:</strong> {{ new Date(trait.updatedAt).toLocaleString('en-US', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }}</p>
+    </div>
+  </UCard>
+</template>

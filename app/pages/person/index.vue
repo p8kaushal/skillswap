@@ -206,6 +206,9 @@ function handleRowSelect(_event: Event, row: TableRow<Person>) {
       >
         Add new person
       </UButton>
+      <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" :to="`/`">
+        Back
+      </UButton>
     </NuxtLink>
   </div>
 </template>
