@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    console.log('person detail page')
+console.log('person detail page')
 import type { TableColumn, TableRow } from '@nuxt/ui'
 import { success } from 'zod'
 
@@ -11,32 +11,32 @@ interface Skill {
   description: string
   createdAt: string
   updatedAt: string
-}  
+}
 let person = ref({});
 let skills = ref([]);
- 
-  const router = useRouter();
-  const { params: { id } } = useRoute();
- 
-  const { pending, error, refresh } = await useLazyAsyncData('person', async () => {
-    let getpersons = await fetch(`/person/${ id }`, {
-      method: 'GET' 
-    }).then(res => res.json());
 
-    person.value = getpersons;
-  }, { server: false }); 
- 
-  const destroy = async (id) => {  
-    await fetch(`/person/${id}`, {
-      method: 'DELETE',
-    })
-    .then(()=>{
+const router = useRouter();
+const { params: { id } } = useRoute();
+
+const { pending, error, refresh } = await useLazyAsyncData('person', async () => {
+  let getpersons = await fetch(`/person/${id}`, {
+    method: 'GET'
+  }).then(res => res.json());
+
+  person.value = getpersons;
+}, { server: false });
+
+const destroy = async (id) => {
+  await fetch(`/person/${id}`, {
+    method: 'DELETE',
+  })
+    .then(() => {
       router.push('/person');
     })
-    .catch((error)=>{
+    .catch((error) => {
       console.error(error);
     });
-  }
+}
 
 const columns: ColumnDef<Skill>[] = [
   {
@@ -58,7 +58,7 @@ const columns: ColumnDef<Skill>[] = [
         td: 'text-left'
       }
     }
-  },  
+  },
   {
     accessorKey: 'level',
     header: 'Level',
@@ -68,7 +68,7 @@ const columns: ColumnDef<Skill>[] = [
         td: 'text-left'
       }
     }
-  },  
+  },
   {
     accessorKey: 'description',
     header: 'Description',
@@ -102,7 +102,7 @@ const columns: ColumnDef<Skill>[] = [
         status
       )
     }
-  },  
+  },
   {
     accessorKey: 'createdAt',
     header: 'Created At',
@@ -126,8 +126,8 @@ const columns: ColumnDef<Skill>[] = [
         minute: '2-digit'
       })
     }
-  },  
-]  
+  },
+]
 
 // handle row click via @select event
 function handleRowSelect(_event: Event, row: TableRow<Skill>) {
@@ -152,37 +152,22 @@ function handleRowSelect(_event: Event, row: TableRow<Skill>) {
     </p>
     <p v-else-if="error">Error while fetching Skill 💔</p>
     <div v-else>
-      <UTable
-        :loading="pending"
-        loading-color="primary"
-        loading-animation="carousel"
-        :data="person.skills || []"
-        :columns="columns"
-        class="w-full"
-        :ui="{
+      <UTable :loading="pending" loading-color="primary" loading-animation="carousel" :data="person.skills || []"
+        :columns="columns" class="w-full" :ui="{
           wrapper: { base: 'max-h-[500px] overflow-y-auto' },
           th: { base: 'sticky top-0 bg-white dark:bg-gray-900 z-10' }
-        }"
-        @select="handleRowSelect"        
-      />
+        }" @select="handleRowSelect" />
     </div>
     <div class="flex gap-3 mt-6">
-    <UButton
-        color="error"
-        variant="solid"
-        icon="i-heroicons-trash"
-        @click="destroy(person.id)"
-    >
+      <UButton color="error" variant="solid" icon="i-heroicons-trash" @click="destroy(person.id)">
         Delete Person
-    </UButton>
-    <UButton
-        color="success"
-        variant="solid"
-        icon="i-heroicons-plus"
-        :to="`/skill/create?id=${ person.id }`"
-    >
+      </UButton>
+      <UButton color="success" variant="solid" icon="i-heroicons-plus" :to="`/skill/create?id=${person.id}`">
         Create Skill
-    </UButton>
+      </UButton>
+      <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" :to="`/person/`">
+        Back
+      </UButton>
     </div>
   </main>
 </template>
