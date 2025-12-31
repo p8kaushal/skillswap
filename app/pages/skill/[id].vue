@@ -7,7 +7,7 @@
             color="gray" 
             variant="ghost" 
             icon="i-lucide-arrow-left"
-            :to="`/person/${skill?.person?.id}`"
+            @click="router.back()"
           >
             Back
           </UButton>

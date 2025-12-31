@@ -70,7 +70,7 @@ async function onSubmit(event: FormSubmitEvent<PersonFormState>) {
                 <UButton type="submit" color="primary" block>
                     Submit
                 </UButton>
-                <UButton color="primary" variant="outline" block to="/person">
+                <UButton color="primary" variant="outline" block @click="router.back()">
                     Cancel (@to-do: it should go to person detail page)
                 </UButton>
             </div>

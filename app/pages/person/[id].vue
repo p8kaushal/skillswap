@@ -165,7 +165,7 @@ function handleRowSelect(_event: Event, row: TableRow<Skill>) {
       <UButton color="success" variant="solid" icon="i-heroicons-plus" :to="`/skill/create?id=${person.id}`">
         Create Skill
       </UButton>
-      <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" :to="`/person/`">
+      <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" @click="router.back()"">
         Back
       </UButton>
     </div>

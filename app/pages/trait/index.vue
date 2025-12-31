@@ -84,6 +84,8 @@ function handleRowSelect(_event: Event, row: TableRow<Trait>) {
   })
 }
 
+const router = useRouter();
+
 </script>
 
 <template>
@@ -125,7 +127,7 @@ function handleRowSelect(_event: Event, row: TableRow<Trait>) {
       >
         Add new trait
       </UButton>
-        <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" :to="`/`">
+        <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" @click="router.back()">
         Back
       </UButton>
     </NuxtLink>

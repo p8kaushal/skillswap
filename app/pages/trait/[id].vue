@@ -46,7 +46,7 @@ interface Trait {
             color="gray" 
             variant="ghost" 
             icon="i-lucide-arrow-left"
-            :to="`/trait/`"
+            @click="router.back()"
           >
             Back
           </UButton>

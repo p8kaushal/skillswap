@@ -165,6 +165,8 @@ function handleRowSelect(_event: Event, row: TableRow<Person>) {
   })
 }
 
+const router = useRouter();
+
 </script>
 
 <template>
@@ -206,7 +208,7 @@ function handleRowSelect(_event: Event, row: TableRow<Person>) {
       >
         Add new person
       </UButton>
-      <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" :to="`/`">
+      <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" @click="router.back()">
         Back
       </UButton>
     </NuxtLink>
