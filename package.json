@@ -18,7 +18,10 @@
     "@nuxt/ui": "^4.3.0",
     "@prisma/adapter-pg": "^7.0.0",
     "@prisma/client": "^7.0.0",
+    "@sidebase/nuxt-auth": "^1.1.1",
     "eslint": "^9.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "next-auth": "~4.21.1",
     "nuxt": "^4.1.2",
     "pg": "^8.16.3",
     "vue": "^3.5.22",
@@ -26,6 +29,7 @@
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.6.1",
     "@types/pg": "^8.15.6",
     "dotenv": "^17.2.1",

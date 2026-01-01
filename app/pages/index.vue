@@ -6,6 +6,11 @@ const links = ref([
     to: '/signup',
   },
   {
+    label: 'Dashboard',
+    color: 'neutral',
+    to: '/dashboard',
+  },
+  {
     label: 'Learn more',
     color: 'neutral',
     variant: 'subtle',
@@ -61,7 +66,7 @@ const features = [
             sides win.
           </p>
 
-          <UList
+          <UPageCard
             :items="features"
             icon="i-heroicons-check-circle"
           />
