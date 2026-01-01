@@ -1,109 +1,74 @@
-<!-- <template>
-  <div class="page">
-    <form @submit="signup">
-      <h1>Signup user</h1>
-      <input autoFocus placeholder="Name" type="text" v-model="name" />
-      <input placeholder="Email address" type="text" v-model="email" />
-      <input :disabled="!name || !email" type="submit" value="Signup" />
-      <NuxtLink class="back" to="/"> or Cancel </NuxtLink>
-    </form>
-  </div>
-</template>
-<script setup>
-  const router = useRouter();
-
-  let name = ref();
-  let email = ref();
-
-  const signup = async (e) => {
-      e.preventDefault()
-
-      try {
-        const body = {
-          name: name.value,
-          email: email.value,
-        }
-
-        await fetch(`/user`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
-        .then(()=>{
-          router.push({ path: '/' })
-        })
-        .catch((error)=>{
-          console.error(error);
-        })
-      } catch (error) {
-        console.error(error)
-      }
-    }
-</script>
-<style scoped>
-  .page {
-    background: white;
-    padding: 3rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  input[type='text'] {
-    width: 100%;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border-radius: 0.25rem;
-    border: 0.125rem solid rgba(0, 0, 0, 0.2);
-  }
-
-  input[type='submit'] {
-    background: #ececec;
-    border: 0;
-    padding: 1rem 2rem;
-  }
-
-  .back {
-    margin-left: 1rem;
-  }
-</style> -->
-
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
+import { fa } from 'zod/locales'
 
 const toast = useToast()
 
-const fields: AuthFormField[] = [{
+const fields: AuthFormField[] = [
+{
+  name: 'name',
+  type: 'text',
+  label: 'Name',
+  placeholder: 'Enter your name',
+  required: true
+},
+{
   name: 'email',
   type: 'email',
   label: 'Email',
   placeholder: 'Enter your email',
-  required: true
+  required: false
 }, {
-  name: 'password',
-  label: 'Password',
-  type: 'password',
-  placeholder: 'Enter your password',
+  name: 'phone',
+  label: 'Phone',
+  type: 'text',
+  placeholder: 'Enter your phone number',
+  required: false
+},
+{
+  name: 'address',
+  label: 'Address',
+  type: 'text',
+  placeholder: 'Enter your address',
+  required: false
+},
+{
+  name: 'url',
+  label: 'URL',
+  type: 'text',
+  placeholder: 'Enter your URL',
+  required: false
+},
+{
+  name: 'description',
+  label: 'Description',
+  type: 'text',
+  placeholder: 'Enter your description',
+  required: false
+},
+{
+  name: 'status',
+  label: 'Status',
+  type: 'text',
+  placeholder: 'Enter your status',
   required: true
-}, {
-  name: 'remember',
-  label: 'Remember me',
-  type: 'checkbox'
-}]
+},
+]
 
-const providers = [{
-  label: 'Google',
-  icon: 'i-simple-icons-google',
-  onClick: () => {
-    toast.add({ title: 'Google', description: 'Login with Google' })
-  }
-}, {
-  label: 'GitHub',
-  icon: 'i-simple-icons-github',
-  onClick: () => {
-    toast.add({ title: 'GitHub', description: 'Login with GitHub' })
-  }
-}]
+// const providers = [{
+//   label: 'Google',
+//   icon: 'i-simple-icons-google',
+//   onClick: () => {
+//     toast.add({ title: 'Google', description: 'Login with Google' })
+//   }
+// }, {
+//   label: 'GitHub',
+//   icon: 'i-simple-icons-github',
+//   onClick: () => {
+//     toast.add({ title: 'GitHub', description: 'Login with GitHub' })
+//   }
+// }]
 
 const schema = z.object({
   email: z.email('Invalid email'),
@@ -122,11 +87,10 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
     <UPageCard class="w-full max-w-md">
       <UAuthForm
         :schema="schema"
-        title="Login"
-        description="Enter your credentials to access your account."
+        title="Sign Up"
+        description="Create a new person to get started"
         icon="i-lucide-user"
         :fields="fields"
-        :providers="providers"
         @submit="onSubmit"
       />
     </UPageCard>
