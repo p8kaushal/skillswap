@@ -35,10 +35,10 @@ model Skill {
   level     String  // e.g., "beginner", "intermediate", "expert"...tbd
   status    String // e.g., "has", "want"
   description      String?
-  trait  Trait?    @relation(fields: [traitId], references: [id])
-  traitId  Int?
-  person    Person?    @relation(fields: [personId], references: [id])
-  personId  Int?
+  trait  Trait    @relation(fields: [traitId], references: [id])
+  traitId  Int
+  person    Person    @relation(fields: [personId], references: [id])
+  personId  Int
   skillAMatches Match[] @relation("SkillAMatches")
   skillBMatches Match[] @relation("SkillBMatches")
   createdAt DateTime @default(now())

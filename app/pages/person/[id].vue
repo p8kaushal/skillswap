@@ -92,7 +92,7 @@ const columns: ColumnDef<Skill>[] = [
       const status = row.getValue('status') as string
       const colorMap = {
         WILLING: 'text-success',
-        NOT_WILLING: 'text-error'
+        'NOT WILLING': 'text-error'
       }
       return h(
         'span',
@@ -165,7 +165,7 @@ function handleRowSelect(_event: Event, row: TableRow<Skill>) {
       <UButton color="success" variant="solid" icon="i-heroicons-plus" :to="`/skill/create?id=${person.id}`">
         Create Skill
       </UButton>
-      <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" @click="router.back()"">
+      <UButton color="primary" variant="ghost" icon="i-lucide-arrow-left" @click="router.back()">
         Back
       </UButton>
     </div>

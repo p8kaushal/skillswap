@@ -208,7 +208,7 @@ const router = useRouter();
       >
         Add new person
       </UButton>
-      <UButton color="gray" variant="ghost" icon="i-lucide-arrow-left" @click="router.back()">
+      <UButton color="primary" variant="ghost" icon="i-lucide-arrow-left" @click="router.back()">
         Back
       </UButton>
     </NuxtLink>
