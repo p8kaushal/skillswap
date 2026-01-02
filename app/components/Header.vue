@@ -19,9 +19,6 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
 <template>
   <UHeader title="Skill Swap" to="/">
-    <template>
-      <UIcon name="i-lucide-lightbulb" class="size-5" />
-    </template>
 
     <UNavigationMenu :items="items" />
 
