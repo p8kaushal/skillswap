@@ -1,16 +1,67 @@
 import jwt from 'jsonwebtoken'
-import { defineEventHandler, readBody, createError } from 'h3'
+import bcrypt from 'bcrypt'
+import { prisma } from '../../../prisma/db'
+interface Credentials {
+  email: string
+  password: string
+}
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
+  const body = await readBody<Credentials>(event)
   const { email, password } = body
 
-  // Mock users
-  const users = [{ email: 'user@example.com', password: 'password123', name: 'Demo User' }]
-  const user = users.find(u => u.email === email && u.password === password)
+ if (!email || !password) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Email and password are required',
+    })
+  }
 
-  if (!user) throw createError({ statusCode: 401, statusMessage: 'Invalid credentials' })
+   // Fetch user without password
+  const person = await prisma.person.findUnique({
+    where: { email: email.toLowerCase().trim() },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      password: true,  // temporarily for verification
+    },
+  })
 
-  const token = jwt.sign({ userId: user.email }, useRuntimeConfig().jwtSecret, { expiresIn: '1h' })
-  return { token: `${token}`, user: { name: user.name, email: user.email } }
+  if (!person) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Invalid credentials',
+    })
+  }
+
+ // Verify password
+  const validPassword =  bcrypt.compare(password, person.password)
+  if (!validPassword) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Invalid credentials',
+    })
+  }
+
+  // Create JWT payload (no password)
+  const payload = {
+    userId: person.id,
+    email: person.email,
+    name: person.name,
+  }
+
+  const token = jwt.sign(payload, useRuntimeConfig().jwtSecret, {
+    expiresIn: '7d',
+  })
+
+  // Response format NuxtAuth expects: token at /token path
+  return {
+    token: `${token}`,
+    user: {
+      id: person.id,
+      email: person.email,
+      name: person.name,
+    },
+  }
 })

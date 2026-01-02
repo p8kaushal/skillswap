@@ -210,8 +210,8 @@ export type SkillGroupByOutputType = {
   level: string
   status: string
   description: string | null
-  traitId: number | null
-  personId: number | null
+  traitId: number
+  personId: number
   createdAt: Date
   updatedAt: Date
   _count: SkillCountAggregateOutputType | null
@@ -244,12 +244,12 @@ export type SkillWhereInput = {
   level?: Prisma.StringFilter<"Skill"> | string
   status?: Prisma.StringFilter<"Skill"> | string
   description?: Prisma.StringNullableFilter<"Skill"> | string | null
-  traitId?: Prisma.IntNullableFilter<"Skill"> | number | null
-  personId?: Prisma.IntNullableFilter<"Skill"> | number | null
+  traitId?: Prisma.IntFilter<"Skill"> | number
+  personId?: Prisma.IntFilter<"Skill"> | number
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
-  trait?: Prisma.XOR<Prisma.TraitNullableScalarRelationFilter, Prisma.TraitWhereInput> | null
-  person?: Prisma.XOR<Prisma.PersonNullableScalarRelationFilter, Prisma.PersonWhereInput> | null
+  trait?: Prisma.XOR<Prisma.TraitScalarRelationFilter, Prisma.TraitWhereInput>
+  person?: Prisma.XOR<Prisma.PersonScalarRelationFilter, Prisma.PersonWhereInput>
   skillAMatches?: Prisma.MatchListRelationFilter
   skillBMatches?: Prisma.MatchListRelationFilter
 }
@@ -259,8 +259,8 @@ export type SkillOrderByWithRelationInput = {
   level?: Prisma.SortOrder
   status?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  traitId?: Prisma.SortOrderInput | Prisma.SortOrder
-  personId?: Prisma.SortOrderInput | Prisma.SortOrder
+  traitId?: Prisma.SortOrder
+  personId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   trait?: Prisma.TraitOrderByWithRelationInput
@@ -277,12 +277,12 @@ export type SkillWhereUniqueInput = Prisma.AtLeast<{
   level?: Prisma.StringFilter<"Skill"> | string
   status?: Prisma.StringFilter<"Skill"> | string
   description?: Prisma.StringNullableFilter<"Skill"> | string | null
-  traitId?: Prisma.IntNullableFilter<"Skill"> | number | null
-  personId?: Prisma.IntNullableFilter<"Skill"> | number | null
+  traitId?: Prisma.IntFilter<"Skill"> | number
+  personId?: Prisma.IntFilter<"Skill"> | number
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
-  trait?: Prisma.XOR<Prisma.TraitNullableScalarRelationFilter, Prisma.TraitWhereInput> | null
-  person?: Prisma.XOR<Prisma.PersonNullableScalarRelationFilter, Prisma.PersonWhereInput> | null
+  trait?: Prisma.XOR<Prisma.TraitScalarRelationFilter, Prisma.TraitWhereInput>
+  person?: Prisma.XOR<Prisma.PersonScalarRelationFilter, Prisma.PersonWhereInput>
   skillAMatches?: Prisma.MatchListRelationFilter
   skillBMatches?: Prisma.MatchListRelationFilter
 }, "id">
@@ -292,8 +292,8 @@ export type SkillOrderByWithAggregationInput = {
   level?: Prisma.SortOrder
   status?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  traitId?: Prisma.SortOrderInput | Prisma.SortOrder
-  personId?: Prisma.SortOrderInput | Prisma.SortOrder
+  traitId?: Prisma.SortOrder
+  personId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SkillCountOrderByAggregateInput
@@ -311,8 +311,8 @@ export type SkillScalarWhereWithAggregatesInput = {
   level?: Prisma.StringWithAggregatesFilter<"Skill"> | string
   status?: Prisma.StringWithAggregatesFilter<"Skill"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Skill"> | string | null
-  traitId?: Prisma.IntNullableWithAggregatesFilter<"Skill"> | number | null
-  personId?: Prisma.IntNullableWithAggregatesFilter<"Skill"> | number | null
+  traitId?: Prisma.IntWithAggregatesFilter<"Skill"> | number
+  personId?: Prisma.IntWithAggregatesFilter<"Skill"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Skill"> | Date | string
 }
@@ -323,8 +323,8 @@ export type SkillCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  trait?: Prisma.TraitCreateNestedOneWithoutSkillsInput
-  person?: Prisma.PersonCreateNestedOneWithoutSkillsInput
+  trait: Prisma.TraitCreateNestedOneWithoutSkillsInput
+  person: Prisma.PersonCreateNestedOneWithoutSkillsInput
   skillAMatches?: Prisma.MatchCreateNestedManyWithoutSkillAInput
   skillBMatches?: Prisma.MatchCreateNestedManyWithoutSkillBInput
 }
@@ -334,8 +334,8 @@ export type SkillUncheckedCreateInput = {
   level: string
   status: string
   description?: string | null
-  traitId?: number | null
-  personId?: number | null
+  traitId: number
+  personId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   skillAMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutSkillAInput
@@ -348,8 +348,8 @@ export type SkillUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trait?: Prisma.TraitUpdateOneWithoutSkillsNestedInput
-  person?: Prisma.PersonUpdateOneWithoutSkillsNestedInput
+  trait?: Prisma.TraitUpdateOneRequiredWithoutSkillsNestedInput
+  person?: Prisma.PersonUpdateOneRequiredWithoutSkillsNestedInput
   skillAMatches?: Prisma.MatchUpdateManyWithoutSkillANestedInput
   skillBMatches?: Prisma.MatchUpdateManyWithoutSkillBNestedInput
 }
@@ -359,8 +359,8 @@ export type SkillUncheckedUpdateInput = {
   level?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  traitId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  personId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  traitId?: Prisma.IntFieldUpdateOperationsInput | number
+  personId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skillAMatches?: Prisma.MatchUncheckedUpdateManyWithoutSkillANestedInput
@@ -372,8 +372,8 @@ export type SkillCreateManyInput = {
   level: string
   status: string
   description?: string | null
-  traitId?: number | null
-  personId?: number | null
+  traitId: number
+  personId: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -391,8 +391,8 @@ export type SkillUncheckedUpdateManyInput = {
   level?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  traitId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  personId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  traitId?: Prisma.IntFieldUpdateOperationsInput | number
+  personId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -546,14 +546,6 @@ export type SkillUncheckedUpdateManyWithoutTraitNestedInput = {
   deleteMany?: Prisma.SkillScalarWhereInput | Prisma.SkillScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type SkillCreateNestedOneWithoutSkillAMatchesInput = {
   create?: Prisma.XOR<Prisma.SkillCreateWithoutSkillAMatchesInput, Prisma.SkillUncheckedCreateWithoutSkillAMatchesInput>
   connectOrCreate?: Prisma.SkillCreateOrConnectWithoutSkillAMatchesInput
@@ -590,7 +582,7 @@ export type SkillCreateWithoutPersonInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  trait?: Prisma.TraitCreateNestedOneWithoutSkillsInput
+  trait: Prisma.TraitCreateNestedOneWithoutSkillsInput
   skillAMatches?: Prisma.MatchCreateNestedManyWithoutSkillAInput
   skillBMatches?: Prisma.MatchCreateNestedManyWithoutSkillBInput
 }
@@ -600,7 +592,7 @@ export type SkillUncheckedCreateWithoutPersonInput = {
   level: string
   status: string
   description?: string | null
-  traitId?: number | null
+  traitId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   skillAMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutSkillAInput
@@ -641,8 +633,8 @@ export type SkillScalarWhereInput = {
   level?: Prisma.StringFilter<"Skill"> | string
   status?: Prisma.StringFilter<"Skill"> | string
   description?: Prisma.StringNullableFilter<"Skill"> | string | null
-  traitId?: Prisma.IntNullableFilter<"Skill"> | number | null
-  personId?: Prisma.IntNullableFilter<"Skill"> | number | null
+  traitId?: Prisma.IntFilter<"Skill"> | number
+  personId?: Prisma.IntFilter<"Skill"> | number
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
 }
@@ -653,7 +645,7 @@ export type SkillCreateWithoutTraitInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  person?: Prisma.PersonCreateNestedOneWithoutSkillsInput
+  person: Prisma.PersonCreateNestedOneWithoutSkillsInput
   skillAMatches?: Prisma.MatchCreateNestedManyWithoutSkillAInput
   skillBMatches?: Prisma.MatchCreateNestedManyWithoutSkillBInput
 }
@@ -663,7 +655,7 @@ export type SkillUncheckedCreateWithoutTraitInput = {
   level: string
   status: string
   description?: string | null
-  personId?: number | null
+  personId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   skillAMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutSkillAInput
@@ -702,8 +694,8 @@ export type SkillCreateWithoutSkillAMatchesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  trait?: Prisma.TraitCreateNestedOneWithoutSkillsInput
-  person?: Prisma.PersonCreateNestedOneWithoutSkillsInput
+  trait: Prisma.TraitCreateNestedOneWithoutSkillsInput
+  person: Prisma.PersonCreateNestedOneWithoutSkillsInput
   skillBMatches?: Prisma.MatchCreateNestedManyWithoutSkillBInput
 }
 
@@ -712,8 +704,8 @@ export type SkillUncheckedCreateWithoutSkillAMatchesInput = {
   level: string
   status: string
   description?: string | null
-  traitId?: number | null
-  personId?: number | null
+  traitId: number
+  personId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   skillBMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutSkillBInput
@@ -730,8 +722,8 @@ export type SkillCreateWithoutSkillBMatchesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  trait?: Prisma.TraitCreateNestedOneWithoutSkillsInput
-  person?: Prisma.PersonCreateNestedOneWithoutSkillsInput
+  trait: Prisma.TraitCreateNestedOneWithoutSkillsInput
+  person: Prisma.PersonCreateNestedOneWithoutSkillsInput
   skillAMatches?: Prisma.MatchCreateNestedManyWithoutSkillAInput
 }
 
@@ -740,8 +732,8 @@ export type SkillUncheckedCreateWithoutSkillBMatchesInput = {
   level: string
   status: string
   description?: string | null
-  traitId?: number | null
-  personId?: number | null
+  traitId: number
+  personId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   skillAMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutSkillAInput
@@ -769,8 +761,8 @@ export type SkillUpdateWithoutSkillAMatchesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trait?: Prisma.TraitUpdateOneWithoutSkillsNestedInput
-  person?: Prisma.PersonUpdateOneWithoutSkillsNestedInput
+  trait?: Prisma.TraitUpdateOneRequiredWithoutSkillsNestedInput
+  person?: Prisma.PersonUpdateOneRequiredWithoutSkillsNestedInput
   skillBMatches?: Prisma.MatchUpdateManyWithoutSkillBNestedInput
 }
 
@@ -779,8 +771,8 @@ export type SkillUncheckedUpdateWithoutSkillAMatchesInput = {
   level?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  traitId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  personId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  traitId?: Prisma.IntFieldUpdateOperationsInput | number
+  personId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skillBMatches?: Prisma.MatchUncheckedUpdateManyWithoutSkillBNestedInput
@@ -803,8 +795,8 @@ export type SkillUpdateWithoutSkillBMatchesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trait?: Prisma.TraitUpdateOneWithoutSkillsNestedInput
-  person?: Prisma.PersonUpdateOneWithoutSkillsNestedInput
+  trait?: Prisma.TraitUpdateOneRequiredWithoutSkillsNestedInput
+  person?: Prisma.PersonUpdateOneRequiredWithoutSkillsNestedInput
   skillAMatches?: Prisma.MatchUpdateManyWithoutSkillANestedInput
 }
 
@@ -813,8 +805,8 @@ export type SkillUncheckedUpdateWithoutSkillBMatchesInput = {
   level?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  traitId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  personId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  traitId?: Prisma.IntFieldUpdateOperationsInput | number
+  personId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skillAMatches?: Prisma.MatchUncheckedUpdateManyWithoutSkillANestedInput
@@ -825,7 +817,7 @@ export type SkillCreateManyPersonInput = {
   level: string
   status: string
   description?: string | null
-  traitId?: number | null
+  traitId: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -836,7 +828,7 @@ export type SkillUpdateWithoutPersonInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trait?: Prisma.TraitUpdateOneWithoutSkillsNestedInput
+  trait?: Prisma.TraitUpdateOneRequiredWithoutSkillsNestedInput
   skillAMatches?: Prisma.MatchUpdateManyWithoutSkillANestedInput
   skillBMatches?: Prisma.MatchUpdateManyWithoutSkillBNestedInput
 }
@@ -846,7 +838,7 @@ export type SkillUncheckedUpdateWithoutPersonInput = {
   level?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  traitId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  traitId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skillAMatches?: Prisma.MatchUncheckedUpdateManyWithoutSkillANestedInput
@@ -858,7 +850,7 @@ export type SkillUncheckedUpdateManyWithoutPersonInput = {
   level?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  traitId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  traitId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -868,7 +860,7 @@ export type SkillCreateManyTraitInput = {
   level: string
   status: string
   description?: string | null
-  personId?: number | null
+  personId: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -879,7 +871,7 @@ export type SkillUpdateWithoutTraitInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  person?: Prisma.PersonUpdateOneWithoutSkillsNestedInput
+  person?: Prisma.PersonUpdateOneRequiredWithoutSkillsNestedInput
   skillAMatches?: Prisma.MatchUpdateManyWithoutSkillANestedInput
   skillBMatches?: Prisma.MatchUpdateManyWithoutSkillBNestedInput
 }
@@ -889,7 +881,7 @@ export type SkillUncheckedUpdateWithoutTraitInput = {
   level?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  personId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skillAMatches?: Prisma.MatchUncheckedUpdateManyWithoutSkillANestedInput
@@ -901,7 +893,7 @@ export type SkillUncheckedUpdateManyWithoutTraitInput = {
   level?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  personId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  personId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -955,8 +947,8 @@ export type SkillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   personId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  trait?: boolean | Prisma.Skill$traitArgs<ExtArgs>
-  person?: boolean | Prisma.Skill$personArgs<ExtArgs>
+  trait?: boolean | Prisma.TraitDefaultArgs<ExtArgs>
+  person?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
   skillAMatches?: boolean | Prisma.Skill$skillAMatchesArgs<ExtArgs>
   skillBMatches?: boolean | Prisma.Skill$skillBMatchesArgs<ExtArgs>
   _count?: boolean | Prisma.SkillCountOutputTypeDefaultArgs<ExtArgs>
@@ -971,8 +963,8 @@ export type SkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   personId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  trait?: boolean | Prisma.Skill$traitArgs<ExtArgs>
-  person?: boolean | Prisma.Skill$personArgs<ExtArgs>
+  trait?: boolean | Prisma.TraitDefaultArgs<ExtArgs>
+  person?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["skill"]>
 
 export type SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -984,8 +976,8 @@ export type SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   personId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  trait?: boolean | Prisma.Skill$traitArgs<ExtArgs>
-  person?: boolean | Prisma.Skill$personArgs<ExtArgs>
+  trait?: boolean | Prisma.TraitDefaultArgs<ExtArgs>
+  person?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["skill"]>
 
 export type SkillSelectScalar = {
@@ -1001,26 +993,26 @@ export type SkillSelectScalar = {
 
 export type SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "level" | "status" | "description" | "traitId" | "personId" | "createdAt" | "updatedAt", ExtArgs["result"]["skill"]>
 export type SkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trait?: boolean | Prisma.Skill$traitArgs<ExtArgs>
-  person?: boolean | Prisma.Skill$personArgs<ExtArgs>
+  trait?: boolean | Prisma.TraitDefaultArgs<ExtArgs>
+  person?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
   skillAMatches?: boolean | Prisma.Skill$skillAMatchesArgs<ExtArgs>
   skillBMatches?: boolean | Prisma.Skill$skillBMatchesArgs<ExtArgs>
   _count?: boolean | Prisma.SkillCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SkillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trait?: boolean | Prisma.Skill$traitArgs<ExtArgs>
-  person?: boolean | Prisma.Skill$personArgs<ExtArgs>
+  trait?: boolean | Prisma.TraitDefaultArgs<ExtArgs>
+  person?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
 }
 export type SkillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trait?: boolean | Prisma.Skill$traitArgs<ExtArgs>
-  person?: boolean | Prisma.Skill$personArgs<ExtArgs>
+  trait?: boolean | Prisma.TraitDefaultArgs<ExtArgs>
+  person?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
 }
 
 export type $SkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Skill"
   objects: {
-    trait: Prisma.$TraitPayload<ExtArgs> | null
-    person: Prisma.$PersonPayload<ExtArgs> | null
+    trait: Prisma.$TraitPayload<ExtArgs>
+    person: Prisma.$PersonPayload<ExtArgs>
     skillAMatches: Prisma.$MatchPayload<ExtArgs>[]
     skillBMatches: Prisma.$MatchPayload<ExtArgs>[]
   }
@@ -1029,8 +1021,8 @@ export type $SkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     level: string
     status: string
     description: string | null
-    traitId: number | null
-    personId: number | null
+    traitId: number
+    personId: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["skill"]>
@@ -1427,8 +1419,8 @@ readonly fields: SkillFieldRefs;
  */
 export interface Prisma__SkillClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  trait<T extends Prisma.Skill$traitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Skill$traitArgs<ExtArgs>>): Prisma.Prisma__TraitClient<runtime.Types.Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  person<T extends Prisma.Skill$personArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Skill$personArgs<ExtArgs>>): Prisma.Prisma__PersonClient<runtime.Types.Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  trait<T extends Prisma.TraitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TraitDefaultArgs<ExtArgs>>): Prisma.Prisma__TraitClient<runtime.Types.Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  person<T extends Prisma.PersonDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PersonDefaultArgs<ExtArgs>>): Prisma.Prisma__PersonClient<runtime.Types.Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   skillAMatches<T extends Prisma.Skill$skillAMatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Skill$skillAMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   skillBMatches<T extends Prisma.Skill$skillBMatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Skill$skillBMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1861,44 +1853,6 @@ export type SkillDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Skills to delete.
    */
   limit?: number
-}
-
-/**
- * Skill.trait
- */
-export type Skill$traitArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Trait
-   */
-  select?: Prisma.TraitSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Trait
-   */
-  omit?: Prisma.TraitOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TraitInclude<ExtArgs> | null
-  where?: Prisma.TraitWhereInput
-}
-
-/**
- * Skill.person
- */
-export type Skill$personArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Person
-   */
-  select?: Prisma.PersonSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Person
-   */
-  omit?: Prisma.PersonOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PersonInclude<ExtArgs> | null
-  where?: Prisma.PersonWhereInput
 }
 
 /**

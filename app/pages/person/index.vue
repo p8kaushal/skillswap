@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import type { TableColumn, TableRow } from '@nuxt/ui'
 
+// 👈 Protects with login + admin role
+definePageMeta({
+  auth: true,           // Redirect unauthenticated to /login
+  middleware: 'admin' as any   // Custom role check
+})
+
 interface Person {
   id: string
   name: string

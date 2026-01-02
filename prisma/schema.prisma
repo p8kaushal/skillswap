@@ -16,6 +16,8 @@ model Person {
   url  String?
   description String?
   status  String
+  password String?
+  roles  String? // e.g., "user", "admin"
   skills Skill[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

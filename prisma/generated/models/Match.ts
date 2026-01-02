@@ -540,6 +540,14 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type MatchCreateNestedManyWithoutSessionsAInput = {
   create?: Prisma.XOR<Prisma.MatchCreateWithoutSessionsAInput, Prisma.MatchUncheckedCreateWithoutSessionsAInput> | Prisma.MatchCreateWithoutSessionsAInput[] | Prisma.MatchUncheckedCreateWithoutSessionsAInput[]
   connectOrCreate?: Prisma.MatchCreateOrConnectWithoutSessionsAInput | Prisma.MatchCreateOrConnectWithoutSessionsAInput[]

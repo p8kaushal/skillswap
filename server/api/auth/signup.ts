@@ -1,11 +1,43 @@
-// Similar to signin, but add new user to mock array (in-memory, resets on restart)
-import jwt from 'jsonwebtoken'
-import { defineEventHandler, readBody, createError, getHeader } from 'h3'
+import { prisma } from '../../../prisma/db'
+import bcrypt from 'bcrypt'
 
+// https://nuxt.com/docs/guide/directory-structure/server
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
-  const { email, password, name } = body
-  // Mock - in real app, use DB
-  const token = jwt.sign({ userId: email }, useRuntimeConfig().jwtSecret, { expiresIn: '1h' })
-  return { token: `Bearer ${token}`, user: { name, email } }
-})
+    // https://nuxt.com/docs/guide/directory-structure/server#handling-requests-with-body
+    const { name, email, phone, address, url, description, status, password} = await readBody(event);
+
+    if (!email || !password) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Email and password are required',
+    })
+  }
+
+    const existing = await prisma.person.findUnique({ where: { email } })
+  if (existing) {
+    throw createError({
+      statusCode: 409,
+      statusMessage: 'User with this email already exists',
+    })
+  }
+
+  const hashed = await bcrypt.hash(password, 10)
+
+    const createPerson = await prisma.person.create({
+        data: {
+            name,
+            email,
+            phone,
+            address,
+            url,
+            status,
+            description,
+            password: hashed
+        }
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+    return createPerson;
+});

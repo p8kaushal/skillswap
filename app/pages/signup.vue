@@ -54,6 +54,13 @@ const fields: AuthFormField[] = [
   placeholder: 'Enter your status',
   required: true
 },
+{
+  name: 'password',
+  label: 'Password',
+  type: 'password',
+  placeholder: 'Enter your password',
+  required: true
+},
 ]
 
 // const providers = [{
@@ -71,14 +78,35 @@ const fields: AuthFormField[] = [
 // }]
 
 const schema = z.object({
+  name: z.string('Name is required').min(2, 'Name must be at least 2 characters'),
   email: z.email('Invalid email'),
-  password: z.string('Password is required').min(8, 'Must be at least 8 characters')
+  password: z.string('Password is required').min(8, 'Must be at least 8 characters'),
+  phone: z.string().optional(),
+  address: z.string().optional(),
+  url: z.string().optional(),
+  description: z.string().optional(),
+  status: z.string('Status is required').min(2, 'Status must be at least 2 characters')
+
 })
 
 type Schema = z.output<typeof schema>
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
+const router = useRouter()  
+
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
   console.log('Submitted', payload)
+  try {
+    await $fetch('/api/auth/signup', {
+      method: 'POST',
+      body: payload.data
+    })
+
+    toast.add?.({ title: 'Person created', color: 'success' })
+    router.push('/person') // or wherever your list page is
+  } catch (error) {
+    console.error(error)
+    toast.add?.({ title: 'Failed to create person', color: 'error' })
+  }  
 }
 </script>
 

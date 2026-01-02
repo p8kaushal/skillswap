@@ -826,6 +826,8 @@ export const PersonScalarFieldEnum = {
   url: 'url',
   description: 'description',
   status: 'status',
+  password: 'password',
+  roles: 'roles',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

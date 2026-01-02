@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { defineEventHandler, createError, getHeader } from 'h3'
+import { prisma } from '../../../prisma/db'
 
 export default defineEventHandler(async (event) => {
   const authHeader = getHeader(event, 'Authorization')
@@ -10,10 +10,33 @@ export default defineEventHandler(async (event) => {
   const token = authHeader.split(' ')[1]
   console.log('Token:', token)
   try {
-    const decoded = jwt.verify(token, useRuntimeConfig().jwtSecret) as any
+    const decoded = jwt.verify(token, useRuntimeConfig().jwtSecret) as {
+      userId: string
+      email: string
+      name: string
+    }
     console.log('Decoded Token:', decoded)
-    return { user: { email: decoded.userId, name: 'Demo User' } }  // Fetch from DB in real app
-  } catch {
+    // 3. Option B: Fetch fresh from Prisma (recommended)
+    const user = await prisma.person.findUnique({
+      where: { id: decoded.userId },
+      select: { id: true, email: true, name: true, roles: true }  // NO password!
+    })
+
+    if (!user) {
+      throw createError({ statusCode: 401, statusMessage: 'User not found' })
+    }
+
+    // ✅ NuxtAuth expects exactly this shape
+    return { 
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        roles: user.roles
+        // Add roles, avatar, etc. as needed
+      }
+    }
+  } catch (error) {
     throw createError({ statusCode: 401, statusMessage: 'Invalid token' })
   }
 })

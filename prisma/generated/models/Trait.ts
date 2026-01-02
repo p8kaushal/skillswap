@@ -353,9 +353,9 @@ export type TraitSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type TraitNullableScalarRelationFilter = {
-  is?: Prisma.TraitWhereInput | null
-  isNot?: Prisma.TraitWhereInput | null
+export type TraitScalarRelationFilter = {
+  is?: Prisma.TraitWhereInput
+  isNot?: Prisma.TraitWhereInput
 }
 
 export type TraitCreateNestedOneWithoutSkillsInput = {
@@ -364,12 +364,10 @@ export type TraitCreateNestedOneWithoutSkillsInput = {
   connect?: Prisma.TraitWhereUniqueInput
 }
 
-export type TraitUpdateOneWithoutSkillsNestedInput = {
+export type TraitUpdateOneRequiredWithoutSkillsNestedInput = {
   create?: Prisma.XOR<Prisma.TraitCreateWithoutSkillsInput, Prisma.TraitUncheckedCreateWithoutSkillsInput>
   connectOrCreate?: Prisma.TraitCreateOrConnectWithoutSkillsInput
   upsert?: Prisma.TraitUpsertWithoutSkillsInput
-  disconnect?: Prisma.TraitWhereInput | boolean
-  delete?: Prisma.TraitWhereInput | boolean
   connect?: Prisma.TraitWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.TraitUpdateToOneWithWhereWithoutSkillsInput, Prisma.TraitUpdateWithoutSkillsInput>, Prisma.TraitUncheckedUpdateWithoutSkillsInput>
 }

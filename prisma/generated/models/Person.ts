@@ -43,6 +43,8 @@ export type PersonMinAggregateOutputType = {
   url: string | null
   description: string | null
   status: string | null
+  password: string | null
+  roles: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +58,8 @@ export type PersonMaxAggregateOutputType = {
   url: string | null
   description: string | null
   status: string | null
+  password: string | null
+  roles: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -69,6 +73,8 @@ export type PersonCountAggregateOutputType = {
   url: number
   description: number
   status: number
+  password: number
+  roles: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,6 +98,8 @@ export type PersonMinAggregateInputType = {
   url?: true
   description?: true
   status?: true
+  password?: true
+  roles?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -105,6 +113,8 @@ export type PersonMaxAggregateInputType = {
   url?: true
   description?: true
   status?: true
+  password?: true
+  roles?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -118,6 +128,8 @@ export type PersonCountAggregateInputType = {
   url?: true
   description?: true
   status?: true
+  password?: true
+  roles?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -218,6 +230,8 @@ export type PersonGroupByOutputType = {
   url: string | null
   description: string | null
   status: string
+  password: string | null
+  roles: string | null
   createdAt: Date
   updatedAt: Date
   _count: PersonCountAggregateOutputType | null
@@ -254,6 +268,8 @@ export type PersonWhereInput = {
   url?: Prisma.StringNullableFilter<"Person"> | string | null
   description?: Prisma.StringNullableFilter<"Person"> | string | null
   status?: Prisma.StringFilter<"Person"> | string
+  password?: Prisma.StringNullableFilter<"Person"> | string | null
+  roles?: Prisma.StringNullableFilter<"Person"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   skills?: Prisma.SkillListRelationFilter
@@ -268,6 +284,8 @@ export type PersonOrderByWithRelationInput = {
   url?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  roles?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   skills?: Prisma.SkillOrderByRelationAggregateInput
@@ -285,6 +303,8 @@ export type PersonWhereUniqueInput = Prisma.AtLeast<{
   url?: Prisma.StringNullableFilter<"Person"> | string | null
   description?: Prisma.StringNullableFilter<"Person"> | string | null
   status?: Prisma.StringFilter<"Person"> | string
+  password?: Prisma.StringNullableFilter<"Person"> | string | null
+  roles?: Prisma.StringNullableFilter<"Person"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   skills?: Prisma.SkillListRelationFilter
@@ -299,6 +319,8 @@ export type PersonOrderByWithAggregationInput = {
   url?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  roles?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PersonCountOrderByAggregateInput
@@ -320,6 +342,8 @@ export type PersonScalarWhereWithAggregatesInput = {
   url?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"Person"> | string
+  password?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
+  roles?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Person"> | Date | string
 }
@@ -332,6 +356,8 @@ export type PersonCreateInput = {
   url?: string | null
   description?: string | null
   status: string
+  password?: string | null
+  roles?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   skills?: Prisma.SkillCreateNestedManyWithoutPersonInput
@@ -346,6 +372,8 @@ export type PersonUncheckedCreateInput = {
   url?: string | null
   description?: string | null
   status: string
+  password?: string | null
+  roles?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   skills?: Prisma.SkillUncheckedCreateNestedManyWithoutPersonInput
@@ -359,6 +387,8 @@ export type PersonUpdateInput = {
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skills?: Prisma.SkillUpdateManyWithoutPersonNestedInput
@@ -373,6 +403,8 @@ export type PersonUncheckedUpdateInput = {
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skills?: Prisma.SkillUncheckedUpdateManyWithoutPersonNestedInput
@@ -387,6 +419,8 @@ export type PersonCreateManyInput = {
   url?: string | null
   description?: string | null
   status: string
+  password?: string | null
+  roles?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -399,6 +433,8 @@ export type PersonUpdateManyMutationInput = {
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -412,6 +448,8 @@ export type PersonUncheckedUpdateManyInput = {
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -425,6 +463,8 @@ export type PersonCountOrderByAggregateInput = {
   url?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  roles?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -442,6 +482,8 @@ export type PersonMaxOrderByAggregateInput = {
   url?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  roles?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -455,6 +497,8 @@ export type PersonMinOrderByAggregateInput = {
   url?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  roles?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -463,9 +507,9 @@ export type PersonSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type PersonNullableScalarRelationFilter = {
-  is?: Prisma.PersonWhereInput | null
-  isNot?: Prisma.PersonWhereInput | null
+export type PersonScalarRelationFilter = {
+  is?: Prisma.PersonWhereInput
+  isNot?: Prisma.PersonWhereInput
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -494,12 +538,10 @@ export type PersonCreateNestedOneWithoutSkillsInput = {
   connect?: Prisma.PersonWhereUniqueInput
 }
 
-export type PersonUpdateOneWithoutSkillsNestedInput = {
+export type PersonUpdateOneRequiredWithoutSkillsNestedInput = {
   create?: Prisma.XOR<Prisma.PersonCreateWithoutSkillsInput, Prisma.PersonUncheckedCreateWithoutSkillsInput>
   connectOrCreate?: Prisma.PersonCreateOrConnectWithoutSkillsInput
   upsert?: Prisma.PersonUpsertWithoutSkillsInput
-  disconnect?: Prisma.PersonWhereInput | boolean
-  delete?: Prisma.PersonWhereInput | boolean
   connect?: Prisma.PersonWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.PersonUpdateToOneWithWhereWithoutSkillsInput, Prisma.PersonUpdateWithoutSkillsInput>, Prisma.PersonUncheckedUpdateWithoutSkillsInput>
 }
@@ -512,6 +554,8 @@ export type PersonCreateWithoutSkillsInput = {
   url?: string | null
   description?: string | null
   status: string
+  password?: string | null
+  roles?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -525,6 +569,8 @@ export type PersonUncheckedCreateWithoutSkillsInput = {
   url?: string | null
   description?: string | null
   status: string
+  password?: string | null
+  roles?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -553,6 +599,8 @@ export type PersonUpdateWithoutSkillsInput = {
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -566,6 +614,8 @@ export type PersonUncheckedUpdateWithoutSkillsInput = {
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -610,6 +660,8 @@ export type PersonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   url?: boolean
   description?: boolean
   status?: boolean
+  password?: boolean
+  roles?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   skills?: boolean | Prisma.Person$skillsArgs<ExtArgs>
@@ -625,6 +677,8 @@ export type PersonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   url?: boolean
   description?: boolean
   status?: boolean
+  password?: boolean
+  roles?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["person"]>
@@ -638,6 +692,8 @@ export type PersonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   url?: boolean
   description?: boolean
   status?: boolean
+  password?: boolean
+  roles?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["person"]>
@@ -651,11 +707,13 @@ export type PersonSelectScalar = {
   url?: boolean
   description?: boolean
   status?: boolean
+  password?: boolean
+  roles?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PersonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "address" | "url" | "description" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["person"]>
+export type PersonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "address" | "url" | "description" | "status" | "password" | "roles" | "createdAt" | "updatedAt", ExtArgs["result"]["person"]>
 export type PersonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   skills?: boolean | Prisma.Person$skillsArgs<ExtArgs>
   _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
@@ -677,6 +735,8 @@ export type $PersonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     url: string | null
     description: string | null
     status: string
+    password: string | null
+    roles: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["person"]>
@@ -1111,6 +1171,8 @@ export interface PersonFieldRefs {
   readonly url: Prisma.FieldRef<"Person", 'String'>
   readonly description: Prisma.FieldRef<"Person", 'String'>
   readonly status: Prisma.FieldRef<"Person", 'String'>
+  readonly password: Prisma.FieldRef<"Person", 'String'>
+  readonly roles: Prisma.FieldRef<"Person", 'String'>
   readonly createdAt: Prisma.FieldRef<"Person", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Person", 'DateTime'>
 }
