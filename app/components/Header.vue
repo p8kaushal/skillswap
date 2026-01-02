@@ -8,11 +8,18 @@ const items = computed<NavigationMenuItem[]>(() => [{
   to: '/person',
   icon: 'i-lucide-user',
   active: route.path.startsWith('/person')
-}, {
+},
+{
   label: 'Trait',
   to: '/trait',
   icon: 'i-lucide-leaf',
   active: route.path.startsWith('/trait')
+}, 
+{
+  label: 'Search',
+  to: '/search',
+  icon: 'i-lucide-search',
+  active: route.path.startsWith('/search')
 }, 
 ])
 </script>
