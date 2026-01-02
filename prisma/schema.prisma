@@ -56,8 +56,7 @@ model Match {
   startedAt DateTime @default(now())
   endedAt   DateTime?
   status     String
-  sessionsA Session[] @relation("SessionA")
-  sessionsB Session[] @relation("SessionB")
+  sessions Session[] @relation("Session")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -70,8 +69,8 @@ model Session {
   scheduledAt DateTime
   duration Int // duration in minutes
   status   String
-  matchA Match[]    @relation("SessionA")
-  matchB Match[]    @relation("SessionB")
+  match Match    @relation("Session", fields: [matchId], references: [id])
+  matchId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

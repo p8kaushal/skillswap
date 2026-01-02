@@ -882,6 +882,7 @@ export const SessionScalarFieldEnum = {
   scheduledAt: 'scheduledAt',
   duration: 'duration',
   status: 'status',
+  matchId: 'matchId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

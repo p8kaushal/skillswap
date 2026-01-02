@@ -29,11 +29,13 @@ export type AggregateSession = {
 export type SessionAvgAggregateOutputType = {
   id: number | null
   duration: number | null
+  matchId: number | null
 }
 
 export type SessionSumAggregateOutputType = {
   id: number | null
   duration: number | null
+  matchId: number | null
 }
 
 export type SessionMinAggregateOutputType = {
@@ -44,6 +46,7 @@ export type SessionMinAggregateOutputType = {
   scheduledAt: Date | null
   duration: number | null
   status: string | null
+  matchId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +59,7 @@ export type SessionMaxAggregateOutputType = {
   scheduledAt: Date | null
   duration: number | null
   status: string | null
+  matchId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -68,6 +72,7 @@ export type SessionCountAggregateOutputType = {
   scheduledAt: number
   duration: number
   status: number
+  matchId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -77,11 +82,13 @@ export type SessionCountAggregateOutputType = {
 export type SessionAvgAggregateInputType = {
   id?: true
   duration?: true
+  matchId?: true
 }
 
 export type SessionSumAggregateInputType = {
   id?: true
   duration?: true
+  matchId?: true
 }
 
 export type SessionMinAggregateInputType = {
@@ -92,6 +99,7 @@ export type SessionMinAggregateInputType = {
   scheduledAt?: true
   duration?: true
   status?: true
+  matchId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -104,6 +112,7 @@ export type SessionMaxAggregateInputType = {
   scheduledAt?: true
   duration?: true
   status?: true
+  matchId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -116,6 +125,7 @@ export type SessionCountAggregateInputType = {
   scheduledAt?: true
   duration?: true
   status?: true
+  matchId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -215,6 +225,7 @@ export type SessionGroupByOutputType = {
   scheduledAt: Date
   duration: number
   status: string
+  matchId: number
   createdAt: Date
   updatedAt: Date
   _count: SessionCountAggregateOutputType | null
@@ -250,10 +261,10 @@ export type SessionWhereInput = {
   scheduledAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   duration?: Prisma.IntFilter<"Session"> | number
   status?: Prisma.StringFilter<"Session"> | string
+  matchId?: Prisma.IntFilter<"Session"> | number
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
-  matchA?: Prisma.MatchListRelationFilter
-  matchB?: Prisma.MatchListRelationFilter
+  match?: Prisma.XOR<Prisma.MatchScalarRelationFilter, Prisma.MatchWhereInput>
 }
 
 export type SessionOrderByWithRelationInput = {
@@ -264,10 +275,10 @@ export type SessionOrderByWithRelationInput = {
   scheduledAt?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  matchId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  matchA?: Prisma.MatchOrderByRelationAggregateInput
-  matchB?: Prisma.MatchOrderByRelationAggregateInput
+  match?: Prisma.MatchOrderByWithRelationInput
 }
 
 export type SessionWhereUniqueInput = Prisma.AtLeast<{
@@ -281,10 +292,10 @@ export type SessionWhereUniqueInput = Prisma.AtLeast<{
   scheduledAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   duration?: Prisma.IntFilter<"Session"> | number
   status?: Prisma.StringFilter<"Session"> | string
+  matchId?: Prisma.IntFilter<"Session"> | number
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
-  matchA?: Prisma.MatchListRelationFilter
-  matchB?: Prisma.MatchListRelationFilter
+  match?: Prisma.XOR<Prisma.MatchScalarRelationFilter, Prisma.MatchWhereInput>
 }, "id">
 
 export type SessionOrderByWithAggregationInput = {
@@ -295,6 +306,7 @@ export type SessionOrderByWithAggregationInput = {
   scheduledAt?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  matchId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SessionCountOrderByAggregateInput
@@ -315,6 +327,7 @@ export type SessionScalarWhereWithAggregatesInput = {
   scheduledAt?: Prisma.DateTimeWithAggregatesFilter<"Session"> | Date | string
   duration?: Prisma.IntWithAggregatesFilter<"Session"> | number
   status?: Prisma.StringWithAggregatesFilter<"Session"> | string
+  matchId?: Prisma.IntWithAggregatesFilter<"Session"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Session"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Session"> | Date | string
 }
@@ -328,8 +341,7 @@ export type SessionCreateInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  matchA?: Prisma.MatchCreateNestedManyWithoutSessionsAInput
-  matchB?: Prisma.MatchCreateNestedManyWithoutSessionsBInput
+  match: Prisma.MatchCreateNestedOneWithoutSessionsInput
 }
 
 export type SessionUncheckedCreateInput = {
@@ -340,10 +352,9 @@ export type SessionUncheckedCreateInput = {
   scheduledAt: Date | string
   duration: number
   status: string
+  matchId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  matchA?: Prisma.MatchUncheckedCreateNestedManyWithoutSessionsAInput
-  matchB?: Prisma.MatchUncheckedCreateNestedManyWithoutSessionsBInput
 }
 
 export type SessionUpdateInput = {
@@ -355,8 +366,7 @@ export type SessionUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matchA?: Prisma.MatchUpdateManyWithoutSessionsANestedInput
-  matchB?: Prisma.MatchUpdateManyWithoutSessionsBNestedInput
+  match?: Prisma.MatchUpdateOneRequiredWithoutSessionsNestedInput
 }
 
 export type SessionUncheckedUpdateInput = {
@@ -367,10 +377,9 @@ export type SessionUncheckedUpdateInput = {
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  matchId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matchA?: Prisma.MatchUncheckedUpdateManyWithoutSessionsANestedInput
-  matchB?: Prisma.MatchUncheckedUpdateManyWithoutSessionsBNestedInput
 }
 
 export type SessionCreateManyInput = {
@@ -381,6 +390,7 @@ export type SessionCreateManyInput = {
   scheduledAt: Date | string
   duration: number
   status: string
+  matchId: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -404,6 +414,7 @@ export type SessionUncheckedUpdateManyInput = {
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  matchId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -426,6 +437,7 @@ export type SessionCountOrderByAggregateInput = {
   scheduledAt?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  matchId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -433,6 +445,7 @@ export type SessionCountOrderByAggregateInput = {
 export type SessionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  matchId?: Prisma.SortOrder
 }
 
 export type SessionMaxOrderByAggregateInput = {
@@ -443,6 +456,7 @@ export type SessionMaxOrderByAggregateInput = {
   scheduledAt?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  matchId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -455,6 +469,7 @@ export type SessionMinOrderByAggregateInput = {
   scheduledAt?: Prisma.SortOrder
   duration?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  matchId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -462,85 +477,52 @@ export type SessionMinOrderByAggregateInput = {
 export type SessionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  matchId?: Prisma.SortOrder
 }
 
-export type SessionCreateNestedManyWithoutMatchAInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchAInput, Prisma.SessionUncheckedCreateWithoutMatchAInput> | Prisma.SessionCreateWithoutMatchAInput[] | Prisma.SessionUncheckedCreateWithoutMatchAInput[]
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchAInput | Prisma.SessionCreateOrConnectWithoutMatchAInput[]
+export type SessionCreateNestedManyWithoutMatchInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchInput, Prisma.SessionUncheckedCreateWithoutMatchInput> | Prisma.SessionCreateWithoutMatchInput[] | Prisma.SessionUncheckedCreateWithoutMatchInput[]
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchInput | Prisma.SessionCreateOrConnectWithoutMatchInput[]
+  createMany?: Prisma.SessionCreateManyMatchInputEnvelope
   connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
 }
 
-export type SessionCreateNestedManyWithoutMatchBInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchBInput, Prisma.SessionUncheckedCreateWithoutMatchBInput> | Prisma.SessionCreateWithoutMatchBInput[] | Prisma.SessionUncheckedCreateWithoutMatchBInput[]
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchBInput | Prisma.SessionCreateOrConnectWithoutMatchBInput[]
+export type SessionUncheckedCreateNestedManyWithoutMatchInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchInput, Prisma.SessionUncheckedCreateWithoutMatchInput> | Prisma.SessionCreateWithoutMatchInput[] | Prisma.SessionUncheckedCreateWithoutMatchInput[]
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchInput | Prisma.SessionCreateOrConnectWithoutMatchInput[]
+  createMany?: Prisma.SessionCreateManyMatchInputEnvelope
   connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
 }
 
-export type SessionUncheckedCreateNestedManyWithoutMatchAInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchAInput, Prisma.SessionUncheckedCreateWithoutMatchAInput> | Prisma.SessionCreateWithoutMatchAInput[] | Prisma.SessionUncheckedCreateWithoutMatchAInput[]
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchAInput | Prisma.SessionCreateOrConnectWithoutMatchAInput[]
-  connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-}
-
-export type SessionUncheckedCreateNestedManyWithoutMatchBInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchBInput, Prisma.SessionUncheckedCreateWithoutMatchBInput> | Prisma.SessionCreateWithoutMatchBInput[] | Prisma.SessionUncheckedCreateWithoutMatchBInput[]
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchBInput | Prisma.SessionCreateOrConnectWithoutMatchBInput[]
-  connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-}
-
-export type SessionUpdateManyWithoutMatchANestedInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchAInput, Prisma.SessionUncheckedCreateWithoutMatchAInput> | Prisma.SessionCreateWithoutMatchAInput[] | Prisma.SessionUncheckedCreateWithoutMatchAInput[]
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchAInput | Prisma.SessionCreateOrConnectWithoutMatchAInput[]
-  upsert?: Prisma.SessionUpsertWithWhereUniqueWithoutMatchAInput | Prisma.SessionUpsertWithWhereUniqueWithoutMatchAInput[]
+export type SessionUpdateManyWithoutMatchNestedInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchInput, Prisma.SessionUncheckedCreateWithoutMatchInput> | Prisma.SessionCreateWithoutMatchInput[] | Prisma.SessionUncheckedCreateWithoutMatchInput[]
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchInput | Prisma.SessionCreateOrConnectWithoutMatchInput[]
+  upsert?: Prisma.SessionUpsertWithWhereUniqueWithoutMatchInput | Prisma.SessionUpsertWithWhereUniqueWithoutMatchInput[]
+  createMany?: Prisma.SessionCreateManyMatchInputEnvelope
   set?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
   disconnect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
   delete?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
   connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  update?: Prisma.SessionUpdateWithWhereUniqueWithoutMatchAInput | Prisma.SessionUpdateWithWhereUniqueWithoutMatchAInput[]
-  updateMany?: Prisma.SessionUpdateManyWithWhereWithoutMatchAInput | Prisma.SessionUpdateManyWithWhereWithoutMatchAInput[]
+  update?: Prisma.SessionUpdateWithWhereUniqueWithoutMatchInput | Prisma.SessionUpdateWithWhereUniqueWithoutMatchInput[]
+  updateMany?: Prisma.SessionUpdateManyWithWhereWithoutMatchInput | Prisma.SessionUpdateManyWithWhereWithoutMatchInput[]
   deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
 }
 
-export type SessionUpdateManyWithoutMatchBNestedInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchBInput, Prisma.SessionUncheckedCreateWithoutMatchBInput> | Prisma.SessionCreateWithoutMatchBInput[] | Prisma.SessionUncheckedCreateWithoutMatchBInput[]
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchBInput | Prisma.SessionCreateOrConnectWithoutMatchBInput[]
-  upsert?: Prisma.SessionUpsertWithWhereUniqueWithoutMatchBInput | Prisma.SessionUpsertWithWhereUniqueWithoutMatchBInput[]
+export type SessionUncheckedUpdateManyWithoutMatchNestedInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchInput, Prisma.SessionUncheckedCreateWithoutMatchInput> | Prisma.SessionCreateWithoutMatchInput[] | Prisma.SessionUncheckedCreateWithoutMatchInput[]
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchInput | Prisma.SessionCreateOrConnectWithoutMatchInput[]
+  upsert?: Prisma.SessionUpsertWithWhereUniqueWithoutMatchInput | Prisma.SessionUpsertWithWhereUniqueWithoutMatchInput[]
+  createMany?: Prisma.SessionCreateManyMatchInputEnvelope
   set?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
   disconnect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
   delete?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
   connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  update?: Prisma.SessionUpdateWithWhereUniqueWithoutMatchBInput | Prisma.SessionUpdateWithWhereUniqueWithoutMatchBInput[]
-  updateMany?: Prisma.SessionUpdateManyWithWhereWithoutMatchBInput | Prisma.SessionUpdateManyWithWhereWithoutMatchBInput[]
+  update?: Prisma.SessionUpdateWithWhereUniqueWithoutMatchInput | Prisma.SessionUpdateWithWhereUniqueWithoutMatchInput[]
+  updateMany?: Prisma.SessionUpdateManyWithWhereWithoutMatchInput | Prisma.SessionUpdateManyWithWhereWithoutMatchInput[]
   deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
 }
 
-export type SessionUncheckedUpdateManyWithoutMatchANestedInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchAInput, Prisma.SessionUncheckedCreateWithoutMatchAInput> | Prisma.SessionCreateWithoutMatchAInput[] | Prisma.SessionUncheckedCreateWithoutMatchAInput[]
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchAInput | Prisma.SessionCreateOrConnectWithoutMatchAInput[]
-  upsert?: Prisma.SessionUpsertWithWhereUniqueWithoutMatchAInput | Prisma.SessionUpsertWithWhereUniqueWithoutMatchAInput[]
-  set?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  disconnect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  delete?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  update?: Prisma.SessionUpdateWithWhereUniqueWithoutMatchAInput | Prisma.SessionUpdateWithWhereUniqueWithoutMatchAInput[]
-  updateMany?: Prisma.SessionUpdateManyWithWhereWithoutMatchAInput | Prisma.SessionUpdateManyWithWhereWithoutMatchAInput[]
-  deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
-}
-
-export type SessionUncheckedUpdateManyWithoutMatchBNestedInput = {
-  create?: Prisma.XOR<Prisma.SessionCreateWithoutMatchBInput, Prisma.SessionUncheckedCreateWithoutMatchBInput> | Prisma.SessionCreateWithoutMatchBInput[] | Prisma.SessionUncheckedCreateWithoutMatchBInput[]
-  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutMatchBInput | Prisma.SessionCreateOrConnectWithoutMatchBInput[]
-  upsert?: Prisma.SessionUpsertWithWhereUniqueWithoutMatchBInput | Prisma.SessionUpsertWithWhereUniqueWithoutMatchBInput[]
-  set?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  disconnect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  delete?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
-  update?: Prisma.SessionUpdateWithWhereUniqueWithoutMatchBInput | Prisma.SessionUpdateWithWhereUniqueWithoutMatchBInput[]
-  updateMany?: Prisma.SessionUpdateManyWithWhereWithoutMatchBInput | Prisma.SessionUpdateManyWithWhereWithoutMatchBInput[]
-  deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
-}
-
-export type SessionCreateWithoutMatchAInput = {
+export type SessionCreateWithoutMatchInput = {
   title: string
   description?: string | null
   url: string
@@ -549,10 +531,9 @@ export type SessionCreateWithoutMatchAInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  matchB?: Prisma.MatchCreateNestedManyWithoutSessionsBInput
 }
 
-export type SessionUncheckedCreateWithoutMatchAInput = {
+export type SessionUncheckedCreateWithoutMatchInput = {
   id?: number
   title: string
   description?: string | null
@@ -562,58 +543,32 @@ export type SessionUncheckedCreateWithoutMatchAInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  matchB?: Prisma.MatchUncheckedCreateNestedManyWithoutSessionsBInput
 }
 
-export type SessionCreateOrConnectWithoutMatchAInput = {
+export type SessionCreateOrConnectWithoutMatchInput = {
   where: Prisma.SessionWhereUniqueInput
-  create: Prisma.XOR<Prisma.SessionCreateWithoutMatchAInput, Prisma.SessionUncheckedCreateWithoutMatchAInput>
+  create: Prisma.XOR<Prisma.SessionCreateWithoutMatchInput, Prisma.SessionUncheckedCreateWithoutMatchInput>
 }
 
-export type SessionCreateWithoutMatchBInput = {
-  title: string
-  description?: string | null
-  url: string
-  scheduledAt: Date | string
-  duration: number
-  status: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  matchA?: Prisma.MatchCreateNestedManyWithoutSessionsAInput
+export type SessionCreateManyMatchInputEnvelope = {
+  data: Prisma.SessionCreateManyMatchInput | Prisma.SessionCreateManyMatchInput[]
+  skipDuplicates?: boolean
 }
 
-export type SessionUncheckedCreateWithoutMatchBInput = {
-  id?: number
-  title: string
-  description?: string | null
-  url: string
-  scheduledAt: Date | string
-  duration: number
-  status: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  matchA?: Prisma.MatchUncheckedCreateNestedManyWithoutSessionsAInput
-}
-
-export type SessionCreateOrConnectWithoutMatchBInput = {
+export type SessionUpsertWithWhereUniqueWithoutMatchInput = {
   where: Prisma.SessionWhereUniqueInput
-  create: Prisma.XOR<Prisma.SessionCreateWithoutMatchBInput, Prisma.SessionUncheckedCreateWithoutMatchBInput>
+  update: Prisma.XOR<Prisma.SessionUpdateWithoutMatchInput, Prisma.SessionUncheckedUpdateWithoutMatchInput>
+  create: Prisma.XOR<Prisma.SessionCreateWithoutMatchInput, Prisma.SessionUncheckedCreateWithoutMatchInput>
 }
 
-export type SessionUpsertWithWhereUniqueWithoutMatchAInput = {
+export type SessionUpdateWithWhereUniqueWithoutMatchInput = {
   where: Prisma.SessionWhereUniqueInput
-  update: Prisma.XOR<Prisma.SessionUpdateWithoutMatchAInput, Prisma.SessionUncheckedUpdateWithoutMatchAInput>
-  create: Prisma.XOR<Prisma.SessionCreateWithoutMatchAInput, Prisma.SessionUncheckedCreateWithoutMatchAInput>
+  data: Prisma.XOR<Prisma.SessionUpdateWithoutMatchInput, Prisma.SessionUncheckedUpdateWithoutMatchInput>
 }
 
-export type SessionUpdateWithWhereUniqueWithoutMatchAInput = {
-  where: Prisma.SessionWhereUniqueInput
-  data: Prisma.XOR<Prisma.SessionUpdateWithoutMatchAInput, Prisma.SessionUncheckedUpdateWithoutMatchAInput>
-}
-
-export type SessionUpdateManyWithWhereWithoutMatchAInput = {
+export type SessionUpdateManyWithWhereWithoutMatchInput = {
   where: Prisma.SessionScalarWhereInput
-  data: Prisma.XOR<Prisma.SessionUpdateManyMutationInput, Prisma.SessionUncheckedUpdateManyWithoutMatchAInput>
+  data: Prisma.XOR<Prisma.SessionUpdateManyMutationInput, Prisma.SessionUncheckedUpdateManyWithoutMatchInput>
 }
 
 export type SessionScalarWhereInput = {
@@ -627,27 +582,24 @@ export type SessionScalarWhereInput = {
   scheduledAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   duration?: Prisma.IntFilter<"Session"> | number
   status?: Prisma.StringFilter<"Session"> | string
+  matchId?: Prisma.IntFilter<"Session"> | number
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
 }
 
-export type SessionUpsertWithWhereUniqueWithoutMatchBInput = {
-  where: Prisma.SessionWhereUniqueInput
-  update: Prisma.XOR<Prisma.SessionUpdateWithoutMatchBInput, Prisma.SessionUncheckedUpdateWithoutMatchBInput>
-  create: Prisma.XOR<Prisma.SessionCreateWithoutMatchBInput, Prisma.SessionUncheckedCreateWithoutMatchBInput>
+export type SessionCreateManyMatchInput = {
+  id?: number
+  title: string
+  description?: string | null
+  url: string
+  scheduledAt: Date | string
+  duration: number
+  status: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type SessionUpdateWithWhereUniqueWithoutMatchBInput = {
-  where: Prisma.SessionWhereUniqueInput
-  data: Prisma.XOR<Prisma.SessionUpdateWithoutMatchBInput, Prisma.SessionUncheckedUpdateWithoutMatchBInput>
-}
-
-export type SessionUpdateManyWithWhereWithoutMatchBInput = {
-  where: Prisma.SessionScalarWhereInput
-  data: Prisma.XOR<Prisma.SessionUpdateManyMutationInput, Prisma.SessionUncheckedUpdateManyWithoutMatchBInput>
-}
-
-export type SessionUpdateWithoutMatchAInput = {
+export type SessionUpdateWithoutMatchInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -656,23 +608,9 @@ export type SessionUpdateWithoutMatchAInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matchB?: Prisma.MatchUpdateManyWithoutSessionsBNestedInput
 }
 
-export type SessionUncheckedUpdateWithoutMatchAInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matchB?: Prisma.MatchUncheckedUpdateManyWithoutSessionsBNestedInput
-}
-
-export type SessionUncheckedUpdateManyWithoutMatchAInput = {
+export type SessionUncheckedUpdateWithoutMatchInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -684,32 +622,7 @@ export type SessionUncheckedUpdateManyWithoutMatchAInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type SessionUpdateWithoutMatchBInput = {
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matchA?: Prisma.MatchUpdateManyWithoutSessionsANestedInput
-}
-
-export type SessionUncheckedUpdateWithoutMatchBInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  duration?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matchA?: Prisma.MatchUncheckedUpdateManyWithoutSessionsANestedInput
-}
-
-export type SessionUncheckedUpdateManyWithoutMatchBInput = {
+export type SessionUncheckedUpdateManyWithoutMatchInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -721,44 +634,6 @@ export type SessionUncheckedUpdateManyWithoutMatchBInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type SessionCountOutputType
- */
-
-export type SessionCountOutputType = {
-  matchA: number
-  matchB: number
-}
-
-export type SessionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  matchA?: boolean | SessionCountOutputTypeCountMatchAArgs
-  matchB?: boolean | SessionCountOutputTypeCountMatchBArgs
-}
-
-/**
- * SessionCountOutputType without action
- */
-export type SessionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SessionCountOutputType
-   */
-  select?: Prisma.SessionCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * SessionCountOutputType without action
- */
-export type SessionCountOutputTypeCountMatchAArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MatchWhereInput
-}
-
-/**
- * SessionCountOutputType without action
- */
-export type SessionCountOutputTypeCountMatchBArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MatchWhereInput
-}
 
 
 export type SessionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -769,11 +644,10 @@ export type SessionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scheduledAt?: boolean
   duration?: boolean
   status?: boolean
+  matchId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  matchA?: boolean | Prisma.Session$matchAArgs<ExtArgs>
-  matchB?: boolean | Prisma.Session$matchBArgs<ExtArgs>
-  _count?: boolean | Prisma.SessionCountOutputTypeDefaultArgs<ExtArgs>
+  match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
 export type SessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -784,8 +658,10 @@ export type SessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   scheduledAt?: boolean
   duration?: boolean
   status?: boolean
+  matchId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
 export type SessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -796,8 +672,10 @@ export type SessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   scheduledAt?: boolean
   duration?: boolean
   status?: boolean
+  matchId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
 export type SessionSelectScalar = {
@@ -808,24 +686,26 @@ export type SessionSelectScalar = {
   scheduledAt?: boolean
   duration?: boolean
   status?: boolean
+  matchId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "url" | "scheduledAt" | "duration" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
+export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "url" | "scheduledAt" | "duration" | "status" | "matchId" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
 export type SessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  matchA?: boolean | Prisma.Session$matchAArgs<ExtArgs>
-  matchB?: boolean | Prisma.Session$matchBArgs<ExtArgs>
-  _count?: boolean | Prisma.SessionCountOutputTypeDefaultArgs<ExtArgs>
+  match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
 }
-export type SessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type SessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type SessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
+}
+export type SessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
+}
 
 export type $SessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Session"
   objects: {
-    matchA: Prisma.$MatchPayload<ExtArgs>[]
-    matchB: Prisma.$MatchPayload<ExtArgs>[]
+    match: Prisma.$MatchPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -835,6 +715,7 @@ export type $SessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     scheduledAt: Date
     duration: number
     status: string
+    matchId: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["session"]>
@@ -1231,8 +1112,7 @@ readonly fields: SessionFieldRefs;
  */
 export interface Prisma__SessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  matchA<T extends Prisma.Session$matchAArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$matchAArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  matchB<T extends Prisma.Session$matchBArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$matchBArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  match<T extends Prisma.MatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MatchDefaultArgs<ExtArgs>>): Prisma.Prisma__MatchClient<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1269,6 +1149,7 @@ export interface SessionFieldRefs {
   readonly scheduledAt: Prisma.FieldRef<"Session", 'DateTime'>
   readonly duration: Prisma.FieldRef<"Session", 'Int'>
   readonly status: Prisma.FieldRef<"Session", 'String'>
+  readonly matchId: Prisma.FieldRef<"Session", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Session", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Session", 'DateTime'>
 }
@@ -1520,6 +1401,10 @@ export type SessionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    */
   data: Prisma.SessionCreateManyInput | Prisma.SessionCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1590,6 +1475,10 @@ export type SessionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many Sessions to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1656,54 +1545,6 @@ export type SessionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Sessions to delete.
    */
   limit?: number
-}
-
-/**
- * Session.matchA
- */
-export type Session$matchAArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Match
-   */
-  select?: Prisma.MatchSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Match
-   */
-  omit?: Prisma.MatchOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MatchInclude<ExtArgs> | null
-  where?: Prisma.MatchWhereInput
-  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
-  cursor?: Prisma.MatchWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
-}
-
-/**
- * Session.matchB
- */
-export type Session$matchBArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Match
-   */
-  select?: Prisma.MatchSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Match
-   */
-  omit?: Prisma.MatchOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MatchInclude<ExtArgs> | null
-  where?: Prisma.MatchWhereInput
-  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
-  cursor?: Prisma.MatchWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
 }
 
 /**

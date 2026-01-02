@@ -20,19 +20,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   await signIn ({
     email: event.data.email,
     password: event.data.password,
-    redirect: false,
-  },
-  ).then(({ error }) => {
-    if (error) {
-      toast.add({ title: 'Error', description: error, color: 'error' })
-    } else {
-      toast.add({ title: 'Success', description: 'Logged in successfully', color: 'success' })
-      // Redirect to dashboard or home page
-      const router = useRouter()
-      router.push('/dashboard')
-    }
-  }
-)
+  },{ callbackUrl: '/dashboard' }
+  )
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }
