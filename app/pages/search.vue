@@ -2,6 +2,11 @@
 import { ref } from 'vue'
 import type { an } from 'vue-router/dist/router-CWoNjPRp.mjs'
 
+definePageMeta({
+  auth: true,           // Redirect unauthenticated to /login
+  middleware: 'auth' as any   // Custom role check
+})
+
 const searchTerm = ref('')
 
 // Lazy fetch so it runs only when we call execute()
