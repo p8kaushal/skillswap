@@ -38,14 +38,7 @@ export default defineNuxtConfig({
       }      
     }
   },
-  build: {
-    transpile: ['@prisma/client']
-  },
-  vite: {
-    build: {
-      rollupOptions: {
-        external: ['@prisma/client']
-      }
-    }
-  }  
+  nitro : {
+    preset: 'vercel'
+  } 
 });
