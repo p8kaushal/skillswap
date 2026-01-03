@@ -37,5 +37,15 @@ export default defineNuxtConfig({
         headerName : 'Authorization',
       }      
     }
-  }
+  },
+  build: {
+    transpile: ['@prisma/client']
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ['@prisma/client']
+      }
+    }
+  }  
 });
