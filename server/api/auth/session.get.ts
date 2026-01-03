@@ -17,8 +17,12 @@ export default defineEventHandler(async (event) => {
     }
     console.log('Decoded Token:', decoded)
     // 3. Option B: Fetch fresh from Prisma (recommended)
+    const userId = Number(decoded.userId)
+    if (Number.isNaN(userId)) {
+      throw createError({ statusCode: 401, statusMessage: 'Invalid user id in token' })
+    }
     const user = await prisma.person.findUnique({
-      where: { id: decoded.userId },
+      where: { id: userId },
       select: { id: true, email: true, name: true, roles: true }  // NO password!
     })
 
