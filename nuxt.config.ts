@@ -40,5 +40,19 @@ export default defineNuxtConfig({
   },
   nitro : {
     preset: 'vercel'
-  } 
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ['@prisma/client', '.prisma/client']
+      }
+    },
+    optimizeDeps: {
+      exclude: ['@prisma/client', '.prisma/client']
+    }
+  },
+  // Ensure Prisma is transpiled for the server runtime
+  build: {
+    transpile: ['@prisma/client']
+  }   
 });
