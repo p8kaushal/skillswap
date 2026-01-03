@@ -35,6 +35,7 @@ export default defineEventHandler(async (event) => {
             email: true,
             skills: {
                 select: {
+                    id: true,
                     trait: {
                         select: {
                             name: true

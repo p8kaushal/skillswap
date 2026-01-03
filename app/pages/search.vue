@@ -1,25 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { an } from 'vue-router/dist/router-CWoNjPRp.mjs'
+import person from '~~/server/routes/person'
+const { data, getSession } = useAuth()
+
+
+const toast = useToast() // if you use Nuxt UI toast; otherwise remove
+const router = useRouter()
 
 definePageMeta({
   auth: true,           // Redirect unauthenticated to /login
   middleware: 'auth' as any   // Custom role check
 })
 
-const searchTerm = ref('')
+onMounted(() => {
+  getSession()
+})
 
-// Lazy fetch so it runs only when we call execute()
-// const {
-//     data: persons,
-//     pending,
-//     error,
-//     execute: runSearch
-// } = useLazyFetch('/person/search', {
-//     query: () => ({ trait: searchTerm.value }),
-//     transform: (data: any[]) => data || [],
-//     server: false
-// })
+const searchTerm = ref('')
 
 const pending = ref(false)
 const persons = ref<any[]>([])
@@ -58,6 +56,39 @@ const clearSearch = () => {
     error.value = null
     hasSearched.value = false
 }
+
+const user = computed(() => data.value?.user)
+
+async function createMatch(personB: any) {
+    let skillA = null
+    //find skillAId from personB based on searchTerm
+    personB.skills.forEach((s: any) => {
+        if (s?.trait?.name?.toLowerCase() === searchTerm.value.trim().toLowerCase()) {
+            console.log('Matched skill for personB:', s)
+            skillA = s
+        }
+    })
+    const body = {
+        personAId: user.value?.id,
+        personBId: personB.id,
+        skillAId: skillA?.id || null,
+        skillBId: null,
+        status: 'INVITE', //should only be invite, accept/decline handled elsewhere
+    }
+    console.log('Creating match with body:', body)
+    try {
+        await $fetch('/match', {
+            method: 'POST',
+            body: body
+        })
+
+        toast.add?.({ title: 'Match invite created', color: 'success' })
+        router.push('/dashboard') // or wherever your list page is
+    } catch (error) {
+        console.error(error)
+        toast.add?.({ title: 'Failed to create match invite', color: 'error' })
+    }
+}
 </script>
 
 <template>
@@ -88,20 +119,6 @@ const clearSearch = () => {
         </p>
 
         <!-- Results list -->
-        <!-- <ul v-else-if="persons && persons.length" class="space-y-3">
-            <li
-                v-for="p in persons"
-                :key="p.id"
-                class="border rounded px-3 py-2"
-            >
-                <div class="font-medium">{{ p.name }}</div>
-                <div class="text-sm text-blue-700">
-                    Email: <span class="font-mono">{{ p.email }}</span>
-                </div>
-            </li>
-        </ul> -->
-
-        <!-- Results list -->
         <div v-else-if="persons && persons.length" class="space-y-3">
             <UCard v-for="p in persons" :key="p.id" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                 <template #header>
@@ -122,6 +139,12 @@ const clearSearch = () => {
                             {{ p.email }}
                         </span>
                     </p>
+                </div>
+
+                <div>
+                    <UButton color="primary" variant="outline" block @click="createMatch(p)">
+                        Send Match Request
+                    </UButton>
                 </div>
             </UCard>
         </div>

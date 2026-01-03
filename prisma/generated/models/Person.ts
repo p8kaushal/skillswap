@@ -273,6 +273,8 @@ export type PersonWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   skills?: Prisma.SkillListRelationFilter
+  personAMatches?: Prisma.MatchListRelationFilter
+  personBMatches?: Prisma.MatchListRelationFilter
 }
 
 export type PersonOrderByWithRelationInput = {
@@ -289,6 +291,8 @@ export type PersonOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   skills?: Prisma.SkillOrderByRelationAggregateInput
+  personAMatches?: Prisma.MatchOrderByRelationAggregateInput
+  personBMatches?: Prisma.MatchOrderByRelationAggregateInput
 }
 
 export type PersonWhereUniqueInput = Prisma.AtLeast<{
@@ -308,6 +312,8 @@ export type PersonWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   skills?: Prisma.SkillListRelationFilter
+  personAMatches?: Prisma.MatchListRelationFilter
+  personBMatches?: Prisma.MatchListRelationFilter
 }, "id" | "email">
 
 export type PersonOrderByWithAggregationInput = {
@@ -361,6 +367,8 @@ export type PersonCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   skills?: Prisma.SkillCreateNestedManyWithoutPersonInput
+  personAMatches?: Prisma.MatchCreateNestedManyWithoutPersonAInput
+  personBMatches?: Prisma.MatchCreateNestedManyWithoutPersonBInput
 }
 
 export type PersonUncheckedCreateInput = {
@@ -377,6 +385,8 @@ export type PersonUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   skills?: Prisma.SkillUncheckedCreateNestedManyWithoutPersonInput
+  personAMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutPersonAInput
+  personBMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutPersonBInput
 }
 
 export type PersonUpdateInput = {
@@ -392,6 +402,8 @@ export type PersonUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skills?: Prisma.SkillUpdateManyWithoutPersonNestedInput
+  personAMatches?: Prisma.MatchUpdateManyWithoutPersonANestedInput
+  personBMatches?: Prisma.MatchUpdateManyWithoutPersonBNestedInput
 }
 
 export type PersonUncheckedUpdateInput = {
@@ -408,6 +420,8 @@ export type PersonUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skills?: Prisma.SkillUncheckedUpdateManyWithoutPersonNestedInput
+  personAMatches?: Prisma.MatchUncheckedUpdateManyWithoutPersonANestedInput
+  personBMatches?: Prisma.MatchUncheckedUpdateManyWithoutPersonBNestedInput
 }
 
 export type PersonCreateManyInput = {
@@ -546,6 +560,34 @@ export type PersonUpdateOneRequiredWithoutSkillsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PersonUpdateToOneWithWhereWithoutSkillsInput, Prisma.PersonUpdateWithoutSkillsInput>, Prisma.PersonUncheckedUpdateWithoutSkillsInput>
 }
 
+export type PersonCreateNestedOneWithoutPersonAMatchesInput = {
+  create?: Prisma.XOR<Prisma.PersonCreateWithoutPersonAMatchesInput, Prisma.PersonUncheckedCreateWithoutPersonAMatchesInput>
+  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutPersonAMatchesInput
+  connect?: Prisma.PersonWhereUniqueInput
+}
+
+export type PersonCreateNestedOneWithoutPersonBMatchesInput = {
+  create?: Prisma.XOR<Prisma.PersonCreateWithoutPersonBMatchesInput, Prisma.PersonUncheckedCreateWithoutPersonBMatchesInput>
+  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutPersonBMatchesInput
+  connect?: Prisma.PersonWhereUniqueInput
+}
+
+export type PersonUpdateOneRequiredWithoutPersonAMatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.PersonCreateWithoutPersonAMatchesInput, Prisma.PersonUncheckedCreateWithoutPersonAMatchesInput>
+  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutPersonAMatchesInput
+  upsert?: Prisma.PersonUpsertWithoutPersonAMatchesInput
+  connect?: Prisma.PersonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PersonUpdateToOneWithWhereWithoutPersonAMatchesInput, Prisma.PersonUpdateWithoutPersonAMatchesInput>, Prisma.PersonUncheckedUpdateWithoutPersonAMatchesInput>
+}
+
+export type PersonUpdateOneRequiredWithoutPersonBMatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.PersonCreateWithoutPersonBMatchesInput, Prisma.PersonUncheckedCreateWithoutPersonBMatchesInput>
+  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutPersonBMatchesInput
+  upsert?: Prisma.PersonUpsertWithoutPersonBMatchesInput
+  connect?: Prisma.PersonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PersonUpdateToOneWithWhereWithoutPersonBMatchesInput, Prisma.PersonUpdateWithoutPersonBMatchesInput>, Prisma.PersonUncheckedUpdateWithoutPersonBMatchesInput>
+}
+
 export type PersonCreateWithoutSkillsInput = {
   name?: string | null
   email: string
@@ -558,6 +600,8 @@ export type PersonCreateWithoutSkillsInput = {
   roles?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  personAMatches?: Prisma.MatchCreateNestedManyWithoutPersonAInput
+  personBMatches?: Prisma.MatchCreateNestedManyWithoutPersonBInput
 }
 
 export type PersonUncheckedCreateWithoutSkillsInput = {
@@ -573,6 +617,8 @@ export type PersonUncheckedCreateWithoutSkillsInput = {
   roles?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  personAMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutPersonAInput
+  personBMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutPersonBInput
 }
 
 export type PersonCreateOrConnectWithoutSkillsInput = {
@@ -603,6 +649,8 @@ export type PersonUpdateWithoutSkillsInput = {
   roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personAMatches?: Prisma.MatchUpdateManyWithoutPersonANestedInput
+  personBMatches?: Prisma.MatchUpdateManyWithoutPersonBNestedInput
 }
 
 export type PersonUncheckedUpdateWithoutSkillsInput = {
@@ -618,6 +666,172 @@ export type PersonUncheckedUpdateWithoutSkillsInput = {
   roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personAMatches?: Prisma.MatchUncheckedUpdateManyWithoutPersonANestedInput
+  personBMatches?: Prisma.MatchUncheckedUpdateManyWithoutPersonBNestedInput
+}
+
+export type PersonCreateWithoutPersonAMatchesInput = {
+  name?: string | null
+  email: string
+  phone?: string | null
+  address?: string | null
+  url?: string | null
+  description?: string | null
+  status: string
+  password?: string | null
+  roles?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  skills?: Prisma.SkillCreateNestedManyWithoutPersonInput
+  personBMatches?: Prisma.MatchCreateNestedManyWithoutPersonBInput
+}
+
+export type PersonUncheckedCreateWithoutPersonAMatchesInput = {
+  id?: number
+  name?: string | null
+  email: string
+  phone?: string | null
+  address?: string | null
+  url?: string | null
+  description?: string | null
+  status: string
+  password?: string | null
+  roles?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutPersonInput
+  personBMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutPersonBInput
+}
+
+export type PersonCreateOrConnectWithoutPersonAMatchesInput = {
+  where: Prisma.PersonWhereUniqueInput
+  create: Prisma.XOR<Prisma.PersonCreateWithoutPersonAMatchesInput, Prisma.PersonUncheckedCreateWithoutPersonAMatchesInput>
+}
+
+export type PersonCreateWithoutPersonBMatchesInput = {
+  name?: string | null
+  email: string
+  phone?: string | null
+  address?: string | null
+  url?: string | null
+  description?: string | null
+  status: string
+  password?: string | null
+  roles?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  skills?: Prisma.SkillCreateNestedManyWithoutPersonInput
+  personAMatches?: Prisma.MatchCreateNestedManyWithoutPersonAInput
+}
+
+export type PersonUncheckedCreateWithoutPersonBMatchesInput = {
+  id?: number
+  name?: string | null
+  email: string
+  phone?: string | null
+  address?: string | null
+  url?: string | null
+  description?: string | null
+  status: string
+  password?: string | null
+  roles?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutPersonInput
+  personAMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutPersonAInput
+}
+
+export type PersonCreateOrConnectWithoutPersonBMatchesInput = {
+  where: Prisma.PersonWhereUniqueInput
+  create: Prisma.XOR<Prisma.PersonCreateWithoutPersonBMatchesInput, Prisma.PersonUncheckedCreateWithoutPersonBMatchesInput>
+}
+
+export type PersonUpsertWithoutPersonAMatchesInput = {
+  update: Prisma.XOR<Prisma.PersonUpdateWithoutPersonAMatchesInput, Prisma.PersonUncheckedUpdateWithoutPersonAMatchesInput>
+  create: Prisma.XOR<Prisma.PersonCreateWithoutPersonAMatchesInput, Prisma.PersonUncheckedCreateWithoutPersonAMatchesInput>
+  where?: Prisma.PersonWhereInput
+}
+
+export type PersonUpdateToOneWithWhereWithoutPersonAMatchesInput = {
+  where?: Prisma.PersonWhereInput
+  data: Prisma.XOR<Prisma.PersonUpdateWithoutPersonAMatchesInput, Prisma.PersonUncheckedUpdateWithoutPersonAMatchesInput>
+}
+
+export type PersonUpdateWithoutPersonAMatchesInput = {
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skills?: Prisma.SkillUpdateManyWithoutPersonNestedInput
+  personBMatches?: Prisma.MatchUpdateManyWithoutPersonBNestedInput
+}
+
+export type PersonUncheckedUpdateWithoutPersonAMatchesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutPersonNestedInput
+  personBMatches?: Prisma.MatchUncheckedUpdateManyWithoutPersonBNestedInput
+}
+
+export type PersonUpsertWithoutPersonBMatchesInput = {
+  update: Prisma.XOR<Prisma.PersonUpdateWithoutPersonBMatchesInput, Prisma.PersonUncheckedUpdateWithoutPersonBMatchesInput>
+  create: Prisma.XOR<Prisma.PersonCreateWithoutPersonBMatchesInput, Prisma.PersonUncheckedCreateWithoutPersonBMatchesInput>
+  where?: Prisma.PersonWhereInput
+}
+
+export type PersonUpdateToOneWithWhereWithoutPersonBMatchesInput = {
+  where?: Prisma.PersonWhereInput
+  data: Prisma.XOR<Prisma.PersonUpdateWithoutPersonBMatchesInput, Prisma.PersonUncheckedUpdateWithoutPersonBMatchesInput>
+}
+
+export type PersonUpdateWithoutPersonBMatchesInput = {
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skills?: Prisma.SkillUpdateManyWithoutPersonNestedInput
+  personAMatches?: Prisma.MatchUpdateManyWithoutPersonANestedInput
+}
+
+export type PersonUncheckedUpdateWithoutPersonBMatchesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutPersonNestedInput
+  personAMatches?: Prisma.MatchUncheckedUpdateManyWithoutPersonANestedInput
 }
 
 
@@ -627,10 +841,14 @@ export type PersonUncheckedUpdateWithoutSkillsInput = {
 
 export type PersonCountOutputType = {
   skills: number
+  personAMatches: number
+  personBMatches: number
 }
 
 export type PersonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   skills?: boolean | PersonCountOutputTypeCountSkillsArgs
+  personAMatches?: boolean | PersonCountOutputTypeCountPersonAMatchesArgs
+  personBMatches?: boolean | PersonCountOutputTypeCountPersonBMatchesArgs
 }
 
 /**
@@ -650,6 +868,20 @@ export type PersonCountOutputTypeCountSkillsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.SkillWhereInput
 }
 
+/**
+ * PersonCountOutputType without action
+ */
+export type PersonCountOutputTypeCountPersonAMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatchWhereInput
+}
+
+/**
+ * PersonCountOutputType without action
+ */
+export type PersonCountOutputTypeCountPersonBMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatchWhereInput
+}
+
 
 export type PersonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -665,6 +897,8 @@ export type PersonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   skills?: boolean | Prisma.Person$skillsArgs<ExtArgs>
+  personAMatches?: boolean | Prisma.Person$personAMatchesArgs<ExtArgs>
+  personBMatches?: boolean | Prisma.Person$personBMatchesArgs<ExtArgs>
   _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["person"]>
 
@@ -716,6 +950,8 @@ export type PersonSelectScalar = {
 export type PersonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "address" | "url" | "description" | "status" | "password" | "roles" | "createdAt" | "updatedAt", ExtArgs["result"]["person"]>
 export type PersonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   skills?: boolean | Prisma.Person$skillsArgs<ExtArgs>
+  personAMatches?: boolean | Prisma.Person$personAMatchesArgs<ExtArgs>
+  personBMatches?: boolean | Prisma.Person$personBMatchesArgs<ExtArgs>
   _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PersonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -725,6 +961,8 @@ export type $PersonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Person"
   objects: {
     skills: Prisma.$SkillPayload<ExtArgs>[]
+    personAMatches: Prisma.$MatchPayload<ExtArgs>[]
+    personBMatches: Prisma.$MatchPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1134,6 +1372,8 @@ readonly fields: PersonFieldRefs;
 export interface Prisma__PersonClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   skills<T extends Prisma.Person$skillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  personAMatches<T extends Prisma.Person$personAMatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$personAMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  personBMatches<T extends Prisma.Person$personBMatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$personBMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1584,6 +1824,54 @@ export type Person$skillsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.SkillScalarFieldEnum | Prisma.SkillScalarFieldEnum[]
+}
+
+/**
+ * Person.personAMatches
+ */
+export type Person$personAMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Match
+   */
+  select?: Prisma.MatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Match
+   */
+  omit?: Prisma.MatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatchInclude<ExtArgs> | null
+  where?: Prisma.MatchWhereInput
+  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
+  cursor?: Prisma.MatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
+}
+
+/**
+ * Person.personBMatches
+ */
+export type Person$personBMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Match
+   */
+  select?: Prisma.MatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Match
+   */
+  omit?: Prisma.MatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatchInclude<ExtArgs> | null
+  where?: Prisma.MatchWhereInput
+  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
+  cursor?: Prisma.MatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
 }
 
 /**

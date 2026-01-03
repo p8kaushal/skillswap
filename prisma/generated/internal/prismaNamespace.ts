@@ -862,6 +862,8 @@ export type SkillScalarFieldEnum = (typeof SkillScalarFieldEnum)[keyof typeof Sk
 
 export const MatchScalarFieldEnum = {
   id: 'id',
+  personAId: 'personAId',
+  personBId: 'personBId',
   skillAId: 'skillAId',
   skillBId: 'skillBId',
   startedAt: 'startedAt',

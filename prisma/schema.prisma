@@ -21,6 +21,8 @@ model Person {
   skills Skill[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  personAMatches Match[] @relation("PersonAMatches")
+  personBMatches Match[] @relation("PersonBMatches")
 }
 
 model Trait {
@@ -49,6 +51,10 @@ model Skill {
 
 model Match {
   id        Int      @id @default(autoincrement())
+  personA   Person   @relation("PersonAMatches", fields: [personAId], references: [id])
+  personAId  Int
+  personB   Person   @relation("PersonBMatches", fields: [personBId], references: [id])
+  personBId  Int
   skillA   Skill    @relation("SkillAMatches", fields: [skillAId], references: [id])
   skillAId  Int
   skillB   Skill?    @relation("SkillBMatches", fields: [skillBId], references: [id])

@@ -28,18 +28,24 @@ export type AggregateMatch = {
 
 export type MatchAvgAggregateOutputType = {
   id: number | null
+  personAId: number | null
+  personBId: number | null
   skillAId: number | null
   skillBId: number | null
 }
 
 export type MatchSumAggregateOutputType = {
   id: number | null
+  personAId: number | null
+  personBId: number | null
   skillAId: number | null
   skillBId: number | null
 }
 
 export type MatchMinAggregateOutputType = {
   id: number | null
+  personAId: number | null
+  personBId: number | null
   skillAId: number | null
   skillBId: number | null
   startedAt: Date | null
@@ -51,6 +57,8 @@ export type MatchMinAggregateOutputType = {
 
 export type MatchMaxAggregateOutputType = {
   id: number | null
+  personAId: number | null
+  personBId: number | null
   skillAId: number | null
   skillBId: number | null
   startedAt: Date | null
@@ -62,6 +70,8 @@ export type MatchMaxAggregateOutputType = {
 
 export type MatchCountAggregateOutputType = {
   id: number
+  personAId: number
+  personBId: number
   skillAId: number
   skillBId: number
   startedAt: number
@@ -75,18 +85,24 @@ export type MatchCountAggregateOutputType = {
 
 export type MatchAvgAggregateInputType = {
   id?: true
+  personAId?: true
+  personBId?: true
   skillAId?: true
   skillBId?: true
 }
 
 export type MatchSumAggregateInputType = {
   id?: true
+  personAId?: true
+  personBId?: true
   skillAId?: true
   skillBId?: true
 }
 
 export type MatchMinAggregateInputType = {
   id?: true
+  personAId?: true
+  personBId?: true
   skillAId?: true
   skillBId?: true
   startedAt?: true
@@ -98,6 +114,8 @@ export type MatchMinAggregateInputType = {
 
 export type MatchMaxAggregateInputType = {
   id?: true
+  personAId?: true
+  personBId?: true
   skillAId?: true
   skillBId?: true
   startedAt?: true
@@ -109,6 +127,8 @@ export type MatchMaxAggregateInputType = {
 
 export type MatchCountAggregateInputType = {
   id?: true
+  personAId?: true
+  personBId?: true
   skillAId?: true
   skillBId?: true
   startedAt?: true
@@ -207,6 +227,8 @@ export type MatchGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type MatchGroupByOutputType = {
   id: number
+  personAId: number
+  personBId: number
   skillAId: number
   skillBId: number | null
   startedAt: Date
@@ -241,6 +263,8 @@ export type MatchWhereInput = {
   OR?: Prisma.MatchWhereInput[]
   NOT?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
   id?: Prisma.IntFilter<"Match"> | number
+  personAId?: Prisma.IntFilter<"Match"> | number
+  personBId?: Prisma.IntFilter<"Match"> | number
   skillAId?: Prisma.IntFilter<"Match"> | number
   skillBId?: Prisma.IntNullableFilter<"Match"> | number | null
   startedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
@@ -248,6 +272,8 @@ export type MatchWhereInput = {
   status?: Prisma.StringFilter<"Match"> | string
   createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
+  personA?: Prisma.XOR<Prisma.PersonScalarRelationFilter, Prisma.PersonWhereInput>
+  personB?: Prisma.XOR<Prisma.PersonScalarRelationFilter, Prisma.PersonWhereInput>
   skillA?: Prisma.XOR<Prisma.SkillScalarRelationFilter, Prisma.SkillWhereInput>
   skillB?: Prisma.XOR<Prisma.SkillNullableScalarRelationFilter, Prisma.SkillWhereInput> | null
   sessions?: Prisma.SessionListRelationFilter
@@ -255,6 +281,8 @@ export type MatchWhereInput = {
 
 export type MatchOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  personAId?: Prisma.SortOrder
+  personBId?: Prisma.SortOrder
   skillAId?: Prisma.SortOrder
   skillBId?: Prisma.SortOrderInput | Prisma.SortOrder
   startedAt?: Prisma.SortOrder
@@ -262,6 +290,8 @@ export type MatchOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  personA?: Prisma.PersonOrderByWithRelationInput
+  personB?: Prisma.PersonOrderByWithRelationInput
   skillA?: Prisma.SkillOrderByWithRelationInput
   skillB?: Prisma.SkillOrderByWithRelationInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
@@ -272,6 +302,8 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
   OR?: Prisma.MatchWhereInput[]
   NOT?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
+  personAId?: Prisma.IntFilter<"Match"> | number
+  personBId?: Prisma.IntFilter<"Match"> | number
   skillAId?: Prisma.IntFilter<"Match"> | number
   skillBId?: Prisma.IntNullableFilter<"Match"> | number | null
   startedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
@@ -279,6 +311,8 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"Match"> | string
   createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
+  personA?: Prisma.XOR<Prisma.PersonScalarRelationFilter, Prisma.PersonWhereInput>
+  personB?: Prisma.XOR<Prisma.PersonScalarRelationFilter, Prisma.PersonWhereInput>
   skillA?: Prisma.XOR<Prisma.SkillScalarRelationFilter, Prisma.SkillWhereInput>
   skillB?: Prisma.XOR<Prisma.SkillNullableScalarRelationFilter, Prisma.SkillWhereInput> | null
   sessions?: Prisma.SessionListRelationFilter
@@ -286,6 +320,8 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
 
 export type MatchOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  personAId?: Prisma.SortOrder
+  personBId?: Prisma.SortOrder
   skillAId?: Prisma.SortOrder
   skillBId?: Prisma.SortOrderInput | Prisma.SortOrder
   startedAt?: Prisma.SortOrder
@@ -305,6 +341,8 @@ export type MatchScalarWhereWithAggregatesInput = {
   OR?: Prisma.MatchScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MatchScalarWhereWithAggregatesInput | Prisma.MatchScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Match"> | number
+  personAId?: Prisma.IntWithAggregatesFilter<"Match"> | number
+  personBId?: Prisma.IntWithAggregatesFilter<"Match"> | number
   skillAId?: Prisma.IntWithAggregatesFilter<"Match"> | number
   skillBId?: Prisma.IntNullableWithAggregatesFilter<"Match"> | number | null
   startedAt?: Prisma.DateTimeWithAggregatesFilter<"Match"> | Date | string
@@ -320,6 +358,8 @@ export type MatchCreateInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  personA: Prisma.PersonCreateNestedOneWithoutPersonAMatchesInput
+  personB: Prisma.PersonCreateNestedOneWithoutPersonBMatchesInput
   skillA: Prisma.SkillCreateNestedOneWithoutSkillAMatchesInput
   skillB?: Prisma.SkillCreateNestedOneWithoutSkillBMatchesInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMatchInput
@@ -327,6 +367,8 @@ export type MatchCreateInput = {
 
 export type MatchUncheckedCreateInput = {
   id?: number
+  personAId: number
+  personBId: number
   skillAId: number
   skillBId?: number | null
   startedAt?: Date | string
@@ -343,6 +385,8 @@ export type MatchUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personA?: Prisma.PersonUpdateOneRequiredWithoutPersonAMatchesNestedInput
+  personB?: Prisma.PersonUpdateOneRequiredWithoutPersonBMatchesNestedInput
   skillA?: Prisma.SkillUpdateOneRequiredWithoutSkillAMatchesNestedInput
   skillB?: Prisma.SkillUpdateOneWithoutSkillBMatchesNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMatchNestedInput
@@ -350,6 +394,8 @@ export type MatchUpdateInput = {
 
 export type MatchUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
   skillAId?: Prisma.IntFieldUpdateOperationsInput | number
   skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -362,6 +408,8 @@ export type MatchUncheckedUpdateInput = {
 
 export type MatchCreateManyInput = {
   id?: number
+  personAId: number
+  personBId: number
   skillAId: number
   skillBId?: number | null
   startedAt?: Date | string
@@ -381,6 +429,8 @@ export type MatchUpdateManyMutationInput = {
 
 export type MatchUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
   skillAId?: Prisma.IntFieldUpdateOperationsInput | number
   skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -402,6 +452,8 @@ export type MatchOrderByRelationAggregateInput = {
 
 export type MatchCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  personAId?: Prisma.SortOrder
+  personBId?: Prisma.SortOrder
   skillAId?: Prisma.SortOrder
   skillBId?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
@@ -413,12 +465,16 @@ export type MatchCountOrderByAggregateInput = {
 
 export type MatchAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  personAId?: Prisma.SortOrder
+  personBId?: Prisma.SortOrder
   skillAId?: Prisma.SortOrder
   skillBId?: Prisma.SortOrder
 }
 
 export type MatchMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  personAId?: Prisma.SortOrder
+  personBId?: Prisma.SortOrder
   skillAId?: Prisma.SortOrder
   skillBId?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
@@ -430,6 +486,8 @@ export type MatchMaxOrderByAggregateInput = {
 
 export type MatchMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  personAId?: Prisma.SortOrder
+  personBId?: Prisma.SortOrder
   skillAId?: Prisma.SortOrder
   skillBId?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
@@ -441,6 +499,8 @@ export type MatchMinOrderByAggregateInput = {
 
 export type MatchSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  personAId?: Prisma.SortOrder
+  personBId?: Prisma.SortOrder
   skillAId?: Prisma.SortOrder
   skillBId?: Prisma.SortOrder
 }
@@ -448,6 +508,90 @@ export type MatchSumOrderByAggregateInput = {
 export type MatchScalarRelationFilter = {
   is?: Prisma.MatchWhereInput
   isNot?: Prisma.MatchWhereInput
+}
+
+export type MatchCreateNestedManyWithoutPersonAInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutPersonAInput, Prisma.MatchUncheckedCreateWithoutPersonAInput> | Prisma.MatchCreateWithoutPersonAInput[] | Prisma.MatchUncheckedCreateWithoutPersonAInput[]
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutPersonAInput | Prisma.MatchCreateOrConnectWithoutPersonAInput[]
+  createMany?: Prisma.MatchCreateManyPersonAInputEnvelope
+  connect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+}
+
+export type MatchCreateNestedManyWithoutPersonBInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutPersonBInput, Prisma.MatchUncheckedCreateWithoutPersonBInput> | Prisma.MatchCreateWithoutPersonBInput[] | Prisma.MatchUncheckedCreateWithoutPersonBInput[]
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutPersonBInput | Prisma.MatchCreateOrConnectWithoutPersonBInput[]
+  createMany?: Prisma.MatchCreateManyPersonBInputEnvelope
+  connect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+}
+
+export type MatchUncheckedCreateNestedManyWithoutPersonAInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutPersonAInput, Prisma.MatchUncheckedCreateWithoutPersonAInput> | Prisma.MatchCreateWithoutPersonAInput[] | Prisma.MatchUncheckedCreateWithoutPersonAInput[]
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutPersonAInput | Prisma.MatchCreateOrConnectWithoutPersonAInput[]
+  createMany?: Prisma.MatchCreateManyPersonAInputEnvelope
+  connect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+}
+
+export type MatchUncheckedCreateNestedManyWithoutPersonBInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutPersonBInput, Prisma.MatchUncheckedCreateWithoutPersonBInput> | Prisma.MatchCreateWithoutPersonBInput[] | Prisma.MatchUncheckedCreateWithoutPersonBInput[]
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutPersonBInput | Prisma.MatchCreateOrConnectWithoutPersonBInput[]
+  createMany?: Prisma.MatchCreateManyPersonBInputEnvelope
+  connect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+}
+
+export type MatchUpdateManyWithoutPersonANestedInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutPersonAInput, Prisma.MatchUncheckedCreateWithoutPersonAInput> | Prisma.MatchCreateWithoutPersonAInput[] | Prisma.MatchUncheckedCreateWithoutPersonAInput[]
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutPersonAInput | Prisma.MatchCreateOrConnectWithoutPersonAInput[]
+  upsert?: Prisma.MatchUpsertWithWhereUniqueWithoutPersonAInput | Prisma.MatchUpsertWithWhereUniqueWithoutPersonAInput[]
+  createMany?: Prisma.MatchCreateManyPersonAInputEnvelope
+  set?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  disconnect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  delete?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  connect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  update?: Prisma.MatchUpdateWithWhereUniqueWithoutPersonAInput | Prisma.MatchUpdateWithWhereUniqueWithoutPersonAInput[]
+  updateMany?: Prisma.MatchUpdateManyWithWhereWithoutPersonAInput | Prisma.MatchUpdateManyWithWhereWithoutPersonAInput[]
+  deleteMany?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
+}
+
+export type MatchUpdateManyWithoutPersonBNestedInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutPersonBInput, Prisma.MatchUncheckedCreateWithoutPersonBInput> | Prisma.MatchCreateWithoutPersonBInput[] | Prisma.MatchUncheckedCreateWithoutPersonBInput[]
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutPersonBInput | Prisma.MatchCreateOrConnectWithoutPersonBInput[]
+  upsert?: Prisma.MatchUpsertWithWhereUniqueWithoutPersonBInput | Prisma.MatchUpsertWithWhereUniqueWithoutPersonBInput[]
+  createMany?: Prisma.MatchCreateManyPersonBInputEnvelope
+  set?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  disconnect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  delete?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  connect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  update?: Prisma.MatchUpdateWithWhereUniqueWithoutPersonBInput | Prisma.MatchUpdateWithWhereUniqueWithoutPersonBInput[]
+  updateMany?: Prisma.MatchUpdateManyWithWhereWithoutPersonBInput | Prisma.MatchUpdateManyWithWhereWithoutPersonBInput[]
+  deleteMany?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
+}
+
+export type MatchUncheckedUpdateManyWithoutPersonANestedInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutPersonAInput, Prisma.MatchUncheckedCreateWithoutPersonAInput> | Prisma.MatchCreateWithoutPersonAInput[] | Prisma.MatchUncheckedCreateWithoutPersonAInput[]
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutPersonAInput | Prisma.MatchCreateOrConnectWithoutPersonAInput[]
+  upsert?: Prisma.MatchUpsertWithWhereUniqueWithoutPersonAInput | Prisma.MatchUpsertWithWhereUniqueWithoutPersonAInput[]
+  createMany?: Prisma.MatchCreateManyPersonAInputEnvelope
+  set?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  disconnect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  delete?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  connect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  update?: Prisma.MatchUpdateWithWhereUniqueWithoutPersonAInput | Prisma.MatchUpdateWithWhereUniqueWithoutPersonAInput[]
+  updateMany?: Prisma.MatchUpdateManyWithWhereWithoutPersonAInput | Prisma.MatchUpdateManyWithWhereWithoutPersonAInput[]
+  deleteMany?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
+}
+
+export type MatchUncheckedUpdateManyWithoutPersonBNestedInput = {
+  create?: Prisma.XOR<Prisma.MatchCreateWithoutPersonBInput, Prisma.MatchUncheckedCreateWithoutPersonBInput> | Prisma.MatchCreateWithoutPersonBInput[] | Prisma.MatchUncheckedCreateWithoutPersonBInput[]
+  connectOrCreate?: Prisma.MatchCreateOrConnectWithoutPersonBInput | Prisma.MatchCreateOrConnectWithoutPersonBInput[]
+  upsert?: Prisma.MatchUpsertWithWhereUniqueWithoutPersonBInput | Prisma.MatchUpsertWithWhereUniqueWithoutPersonBInput[]
+  createMany?: Prisma.MatchCreateManyPersonBInputEnvelope
+  set?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  disconnect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  delete?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  connect?: Prisma.MatchWhereUniqueInput | Prisma.MatchWhereUniqueInput[]
+  update?: Prisma.MatchUpdateWithWhereUniqueWithoutPersonBInput | Prisma.MatchUpdateWithWhereUniqueWithoutPersonBInput[]
+  updateMany?: Prisma.MatchUpdateManyWithWhereWithoutPersonBInput | Prisma.MatchUpdateManyWithWhereWithoutPersonBInput[]
+  deleteMany?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
 }
 
 export type MatchCreateNestedManyWithoutSkillAInput = {
@@ -560,18 +704,140 @@ export type MatchUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MatchUpdateToOneWithWhereWithoutSessionsInput, Prisma.MatchUpdateWithoutSessionsInput>, Prisma.MatchUncheckedUpdateWithoutSessionsInput>
 }
 
+export type MatchCreateWithoutPersonAInput = {
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  status: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  personB: Prisma.PersonCreateNestedOneWithoutPersonBMatchesInput
+  skillA: Prisma.SkillCreateNestedOneWithoutSkillAMatchesInput
+  skillB?: Prisma.SkillCreateNestedOneWithoutSkillBMatchesInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutMatchInput
+}
+
+export type MatchUncheckedCreateWithoutPersonAInput = {
+  id?: number
+  personBId: number
+  skillAId: number
+  skillBId?: number | null
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  status: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMatchInput
+}
+
+export type MatchCreateOrConnectWithoutPersonAInput = {
+  where: Prisma.MatchWhereUniqueInput
+  create: Prisma.XOR<Prisma.MatchCreateWithoutPersonAInput, Prisma.MatchUncheckedCreateWithoutPersonAInput>
+}
+
+export type MatchCreateManyPersonAInputEnvelope = {
+  data: Prisma.MatchCreateManyPersonAInput | Prisma.MatchCreateManyPersonAInput[]
+  skipDuplicates?: boolean
+}
+
+export type MatchCreateWithoutPersonBInput = {
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  status: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  personA: Prisma.PersonCreateNestedOneWithoutPersonAMatchesInput
+  skillA: Prisma.SkillCreateNestedOneWithoutSkillAMatchesInput
+  skillB?: Prisma.SkillCreateNestedOneWithoutSkillBMatchesInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutMatchInput
+}
+
+export type MatchUncheckedCreateWithoutPersonBInput = {
+  id?: number
+  personAId: number
+  skillAId: number
+  skillBId?: number | null
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  status: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutMatchInput
+}
+
+export type MatchCreateOrConnectWithoutPersonBInput = {
+  where: Prisma.MatchWhereUniqueInput
+  create: Prisma.XOR<Prisma.MatchCreateWithoutPersonBInput, Prisma.MatchUncheckedCreateWithoutPersonBInput>
+}
+
+export type MatchCreateManyPersonBInputEnvelope = {
+  data: Prisma.MatchCreateManyPersonBInput | Prisma.MatchCreateManyPersonBInput[]
+  skipDuplicates?: boolean
+}
+
+export type MatchUpsertWithWhereUniqueWithoutPersonAInput = {
+  where: Prisma.MatchWhereUniqueInput
+  update: Prisma.XOR<Prisma.MatchUpdateWithoutPersonAInput, Prisma.MatchUncheckedUpdateWithoutPersonAInput>
+  create: Prisma.XOR<Prisma.MatchCreateWithoutPersonAInput, Prisma.MatchUncheckedCreateWithoutPersonAInput>
+}
+
+export type MatchUpdateWithWhereUniqueWithoutPersonAInput = {
+  where: Prisma.MatchWhereUniqueInput
+  data: Prisma.XOR<Prisma.MatchUpdateWithoutPersonAInput, Prisma.MatchUncheckedUpdateWithoutPersonAInput>
+}
+
+export type MatchUpdateManyWithWhereWithoutPersonAInput = {
+  where: Prisma.MatchScalarWhereInput
+  data: Prisma.XOR<Prisma.MatchUpdateManyMutationInput, Prisma.MatchUncheckedUpdateManyWithoutPersonAInput>
+}
+
+export type MatchScalarWhereInput = {
+  AND?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
+  OR?: Prisma.MatchScalarWhereInput[]
+  NOT?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
+  id?: Prisma.IntFilter<"Match"> | number
+  personAId?: Prisma.IntFilter<"Match"> | number
+  personBId?: Prisma.IntFilter<"Match"> | number
+  skillAId?: Prisma.IntFilter<"Match"> | number
+  skillBId?: Prisma.IntNullableFilter<"Match"> | number | null
+  startedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
+  endedAt?: Prisma.DateTimeNullableFilter<"Match"> | Date | string | null
+  status?: Prisma.StringFilter<"Match"> | string
+  createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
+}
+
+export type MatchUpsertWithWhereUniqueWithoutPersonBInput = {
+  where: Prisma.MatchWhereUniqueInput
+  update: Prisma.XOR<Prisma.MatchUpdateWithoutPersonBInput, Prisma.MatchUncheckedUpdateWithoutPersonBInput>
+  create: Prisma.XOR<Prisma.MatchCreateWithoutPersonBInput, Prisma.MatchUncheckedCreateWithoutPersonBInput>
+}
+
+export type MatchUpdateWithWhereUniqueWithoutPersonBInput = {
+  where: Prisma.MatchWhereUniqueInput
+  data: Prisma.XOR<Prisma.MatchUpdateWithoutPersonBInput, Prisma.MatchUncheckedUpdateWithoutPersonBInput>
+}
+
+export type MatchUpdateManyWithWhereWithoutPersonBInput = {
+  where: Prisma.MatchScalarWhereInput
+  data: Prisma.XOR<Prisma.MatchUpdateManyMutationInput, Prisma.MatchUncheckedUpdateManyWithoutPersonBInput>
+}
+
 export type MatchCreateWithoutSkillAInput = {
   startedAt?: Date | string
   endedAt?: Date | string | null
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  personA: Prisma.PersonCreateNestedOneWithoutPersonAMatchesInput
+  personB: Prisma.PersonCreateNestedOneWithoutPersonBMatchesInput
   skillB?: Prisma.SkillCreateNestedOneWithoutSkillBMatchesInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMatchInput
 }
 
 export type MatchUncheckedCreateWithoutSkillAInput = {
   id?: number
+  personAId: number
+  personBId: number
   skillBId?: number | null
   startedAt?: Date | string
   endedAt?: Date | string | null
@@ -597,12 +863,16 @@ export type MatchCreateWithoutSkillBInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  personA: Prisma.PersonCreateNestedOneWithoutPersonAMatchesInput
+  personB: Prisma.PersonCreateNestedOneWithoutPersonBMatchesInput
   skillA: Prisma.SkillCreateNestedOneWithoutSkillAMatchesInput
   sessions?: Prisma.SessionCreateNestedManyWithoutMatchInput
 }
 
 export type MatchUncheckedCreateWithoutSkillBInput = {
   id?: number
+  personAId: number
+  personBId: number
   skillAId: number
   startedAt?: Date | string
   endedAt?: Date | string | null
@@ -638,20 +908,6 @@ export type MatchUpdateManyWithWhereWithoutSkillAInput = {
   data: Prisma.XOR<Prisma.MatchUpdateManyMutationInput, Prisma.MatchUncheckedUpdateManyWithoutSkillAInput>
 }
 
-export type MatchScalarWhereInput = {
-  AND?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
-  OR?: Prisma.MatchScalarWhereInput[]
-  NOT?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
-  id?: Prisma.IntFilter<"Match"> | number
-  skillAId?: Prisma.IntFilter<"Match"> | number
-  skillBId?: Prisma.IntNullableFilter<"Match"> | number | null
-  startedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
-  endedAt?: Prisma.DateTimeNullableFilter<"Match"> | Date | string | null
-  status?: Prisma.StringFilter<"Match"> | string
-  createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
-}
-
 export type MatchUpsertWithWhereUniqueWithoutSkillBInput = {
   where: Prisma.MatchWhereUniqueInput
   update: Prisma.XOR<Prisma.MatchUpdateWithoutSkillBInput, Prisma.MatchUncheckedUpdateWithoutSkillBInput>
@@ -674,12 +930,16 @@ export type MatchCreateWithoutSessionsInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  personA: Prisma.PersonCreateNestedOneWithoutPersonAMatchesInput
+  personB: Prisma.PersonCreateNestedOneWithoutPersonBMatchesInput
   skillA: Prisma.SkillCreateNestedOneWithoutSkillAMatchesInput
   skillB?: Prisma.SkillCreateNestedOneWithoutSkillBMatchesInput
 }
 
 export type MatchUncheckedCreateWithoutSessionsInput = {
   id?: number
+  personAId: number
+  personBId: number
   skillAId: number
   skillBId?: number | null
   startedAt?: Date | string
@@ -711,12 +971,114 @@ export type MatchUpdateWithoutSessionsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personA?: Prisma.PersonUpdateOneRequiredWithoutPersonAMatchesNestedInput
+  personB?: Prisma.PersonUpdateOneRequiredWithoutPersonBMatchesNestedInput
   skillA?: Prisma.SkillUpdateOneRequiredWithoutSkillAMatchesNestedInput
   skillB?: Prisma.SkillUpdateOneWithoutSkillBMatchesNestedInput
 }
 
 export type MatchUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
+  skillAId?: Prisma.IntFieldUpdateOperationsInput | number
+  skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MatchCreateManyPersonAInput = {
+  id?: number
+  personBId: number
+  skillAId: number
+  skillBId?: number | null
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  status: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MatchCreateManyPersonBInput = {
+  id?: number
+  personAId: number
+  skillAId: number
+  skillBId?: number | null
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  status: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MatchUpdateWithoutPersonAInput = {
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personB?: Prisma.PersonUpdateOneRequiredWithoutPersonBMatchesNestedInput
+  skillA?: Prisma.SkillUpdateOneRequiredWithoutSkillAMatchesNestedInput
+  skillB?: Prisma.SkillUpdateOneWithoutSkillBMatchesNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutMatchNestedInput
+}
+
+export type MatchUncheckedUpdateWithoutPersonAInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
+  skillAId?: Prisma.IntFieldUpdateOperationsInput | number
+  skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutMatchNestedInput
+}
+
+export type MatchUncheckedUpdateManyWithoutPersonAInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
+  skillAId?: Prisma.IntFieldUpdateOperationsInput | number
+  skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MatchUpdateWithoutPersonBInput = {
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personA?: Prisma.PersonUpdateOneRequiredWithoutPersonAMatchesNestedInput
+  skillA?: Prisma.SkillUpdateOneRequiredWithoutSkillAMatchesNestedInput
+  skillB?: Prisma.SkillUpdateOneWithoutSkillBMatchesNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutMatchNestedInput
+}
+
+export type MatchUncheckedUpdateWithoutPersonBInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
+  skillAId?: Prisma.IntFieldUpdateOperationsInput | number
+  skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutMatchNestedInput
+}
+
+export type MatchUncheckedUpdateManyWithoutPersonBInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
   skillAId?: Prisma.IntFieldUpdateOperationsInput | number
   skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -728,6 +1090,8 @@ export type MatchUncheckedUpdateWithoutSessionsInput = {
 
 export type MatchCreateManySkillAInput = {
   id?: number
+  personAId: number
+  personBId: number
   skillBId?: number | null
   startedAt?: Date | string
   endedAt?: Date | string | null
@@ -738,6 +1102,8 @@ export type MatchCreateManySkillAInput = {
 
 export type MatchCreateManySkillBInput = {
   id?: number
+  personAId: number
+  personBId: number
   skillAId: number
   startedAt?: Date | string
   endedAt?: Date | string | null
@@ -752,12 +1118,16 @@ export type MatchUpdateWithoutSkillAInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personA?: Prisma.PersonUpdateOneRequiredWithoutPersonAMatchesNestedInput
+  personB?: Prisma.PersonUpdateOneRequiredWithoutPersonBMatchesNestedInput
   skillB?: Prisma.SkillUpdateOneWithoutSkillBMatchesNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMatchNestedInput
 }
 
 export type MatchUncheckedUpdateWithoutSkillAInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
   skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -769,6 +1139,8 @@ export type MatchUncheckedUpdateWithoutSkillAInput = {
 
 export type MatchUncheckedUpdateManyWithoutSkillAInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
   skillBId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -783,12 +1155,16 @@ export type MatchUpdateWithoutSkillBInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  personA?: Prisma.PersonUpdateOneRequiredWithoutPersonAMatchesNestedInput
+  personB?: Prisma.PersonUpdateOneRequiredWithoutPersonBMatchesNestedInput
   skillA?: Prisma.SkillUpdateOneRequiredWithoutSkillAMatchesNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutMatchNestedInput
 }
 
 export type MatchUncheckedUpdateWithoutSkillBInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
   skillAId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -800,6 +1176,8 @@ export type MatchUncheckedUpdateWithoutSkillBInput = {
 
 export type MatchUncheckedUpdateManyWithoutSkillBInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  personAId?: Prisma.IntFieldUpdateOperationsInput | number
+  personBId?: Prisma.IntFieldUpdateOperationsInput | number
   skillAId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -841,6 +1219,8 @@ export type MatchCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.
 
 export type MatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  personAId?: boolean
+  personBId?: boolean
   skillAId?: boolean
   skillBId?: boolean
   startedAt?: boolean
@@ -848,6 +1228,8 @@ export type MatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  personA?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
+  personB?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
   skillA?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
   skillB?: boolean | Prisma.Match$skillBArgs<ExtArgs>
   sessions?: boolean | Prisma.Match$sessionsArgs<ExtArgs>
@@ -856,6 +1238,8 @@ export type MatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type MatchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  personAId?: boolean
+  personBId?: boolean
   skillAId?: boolean
   skillBId?: boolean
   startedAt?: boolean
@@ -863,12 +1247,16 @@ export type MatchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  personA?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
+  personB?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
   skillA?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
   skillB?: boolean | Prisma.Match$skillBArgs<ExtArgs>
 }, ExtArgs["result"]["match"]>
 
 export type MatchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  personAId?: boolean
+  personBId?: boolean
   skillAId?: boolean
   skillBId?: boolean
   startedAt?: boolean
@@ -876,12 +1264,16 @@ export type MatchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  personA?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
+  personB?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
   skillA?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
   skillB?: boolean | Prisma.Match$skillBArgs<ExtArgs>
 }, ExtArgs["result"]["match"]>
 
 export type MatchSelectScalar = {
   id?: boolean
+  personAId?: boolean
+  personBId?: boolean
   skillAId?: boolean
   skillBId?: boolean
   startedAt?: boolean
@@ -891,18 +1283,24 @@ export type MatchSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "skillAId" | "skillBId" | "startedAt" | "endedAt" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["match"]>
+export type MatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "personAId" | "personBId" | "skillAId" | "skillBId" | "startedAt" | "endedAt" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["match"]>
 export type MatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  personA?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
+  personB?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
   skillA?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
   skillB?: boolean | Prisma.Match$skillBArgs<ExtArgs>
   sessions?: boolean | Prisma.Match$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.MatchCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MatchIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  personA?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
+  personB?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
   skillA?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
   skillB?: boolean | Prisma.Match$skillBArgs<ExtArgs>
 }
 export type MatchIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  personA?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
+  personB?: boolean | Prisma.PersonDefaultArgs<ExtArgs>
   skillA?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
   skillB?: boolean | Prisma.Match$skillBArgs<ExtArgs>
 }
@@ -910,12 +1308,16 @@ export type MatchIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $MatchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Match"
   objects: {
+    personA: Prisma.$PersonPayload<ExtArgs>
+    personB: Prisma.$PersonPayload<ExtArgs>
     skillA: Prisma.$SkillPayload<ExtArgs>
     skillB: Prisma.$SkillPayload<ExtArgs> | null
     sessions: Prisma.$SessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    personAId: number
+    personBId: number
     skillAId: number
     skillBId: number | null
     startedAt: Date
@@ -1317,6 +1719,8 @@ readonly fields: MatchFieldRefs;
  */
 export interface Prisma__MatchClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  personA<T extends Prisma.PersonDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PersonDefaultArgs<ExtArgs>>): Prisma.Prisma__PersonClient<runtime.Types.Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  personB<T extends Prisma.PersonDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PersonDefaultArgs<ExtArgs>>): Prisma.Prisma__PersonClient<runtime.Types.Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   skillA<T extends Prisma.SkillDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SkillDefaultArgs<ExtArgs>>): Prisma.Prisma__SkillClient<runtime.Types.Result.GetResult<Prisma.$SkillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   skillB<T extends Prisma.Match$skillBArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Match$skillBArgs<ExtArgs>>): Prisma.Prisma__SkillClient<runtime.Types.Result.GetResult<Prisma.$SkillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sessions<T extends Prisma.Match$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Match$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1350,6 +1754,8 @@ export interface Prisma__MatchClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface MatchFieldRefs {
   readonly id: Prisma.FieldRef<"Match", 'Int'>
+  readonly personAId: Prisma.FieldRef<"Match", 'Int'>
+  readonly personBId: Prisma.FieldRef<"Match", 'Int'>
   readonly skillAId: Prisma.FieldRef<"Match", 'Int'>
   readonly skillBId: Prisma.FieldRef<"Match", 'Int'>
   readonly startedAt: Prisma.FieldRef<"Match", 'DateTime'>
