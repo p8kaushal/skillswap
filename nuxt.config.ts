@@ -38,21 +38,32 @@ export default defineNuxtConfig({
       }      
     }
   },
-  nitro : {
-    preset: 'vercel'
+  nitro: {
+    preset: 'vercel',
+    // Ensure @prisma/client is treated as an external dependency for Nitro builds
+    externals: {
+      external: ['@prisma/client'],
+      inline: []
+    }
   },
   vite: {
     build: {
       rollupOptions: {
-        external: ['@prisma/client', '.prisma/client']
+        // Externalize Prisma and its runtime so Rollup doesn't try to bundle node-only APIs into the browser build
+        external: ['@prisma/client', '.prisma/client', /@prisma\/client\/runtime\/.*/]
       }
     },
     optimizeDeps: {
-      exclude: ['@prisma/client', '.prisma/client']
+      // Prevent Vite from pre-bundling Prisma
+      exclude: ['@prisma/client', '.prisma/client', /@prisma\/client\/runtime\/.*/]
+    },
+    ssr: {
+      // Ensure Prisma is not bundled for SSR client-side bundles
+      external: ['@prisma/client', '@prisma/client/runtime/*', '.prisma/client']
     }
   },
-  // Ensure Prisma is transpiled for the server runtime
+  // Do NOT transpile Prisma client into the client bundle — keep it external
   build: {
-    transpile: ['@prisma/client']
+    transpile: []
   }   
 });
