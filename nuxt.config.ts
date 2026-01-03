@@ -49,17 +49,22 @@ export default defineNuxtConfig({
   vite: {
     build: {
       rollupOptions: {
-        // Externalize Prisma and its runtime so Rollup doesn't try to bundle node-only APIs into the browser build
-        external: ['@prisma/client', '.prisma/client', /@prisma\/client\/runtime\/.*/]
+        // Externalize Prisma packages and any local prisma-generated files so Rollup won't bundle node-only APIs into browser artifacts
+        external: [
+          '@prisma/client',
+          '.prisma/client',
+          /@prisma\/client\/runtime\/.*/,
+          /prisma\/.*/
+        ]
       }
     },
     optimizeDeps: {
-      // Prevent Vite from pre-bundling Prisma
-      exclude: ['@prisma/client', '.prisma/client', /@prisma\/client\/runtime\/.*/]
+      // Prevent Vite from pre-bundling Prisma and the generated files
+      exclude: ['@prisma/client', '.prisma/client', /@prisma\/client\/runtime\/.*/, /prisma\/.*/]
     },
     ssr: {
-      // Ensure Prisma is not bundled for SSR client-side bundles
-      external: ['@prisma/client', '@prisma/client/runtime/*', '.prisma/client']
+      // Ensure Prisma and local prisma files are external for SSR builds
+      external: ['@prisma/client', '@prisma/client/runtime/*', '.prisma/client', /prisma\/.*/]
     }
   },
   // Do NOT transpile Prisma client into the client bundle — keep it external
