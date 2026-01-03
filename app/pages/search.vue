@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { get } from 'http'
 import { ref } from 'vue'
 import type { an } from 'vue-router/dist/router-CWoNjPRp.mjs'
 import person from '~~/server/routes/person'
@@ -9,12 +10,12 @@ const toast = useToast() // if you use Nuxt UI toast; otherwise remove
 const router = useRouter()
 
 definePageMeta({
-  auth: true,           // Redirect unauthenticated to /login
-  middleware: 'auth' as any   // Custom role check
+    auth: true,           // Redirect unauthenticated to /login
+    middleware: 'auth' as any   // Custom role check
 })
 
 onMounted(() => {
-  getSession()
+    getSession()
 })
 
 const searchTerm = ref('')
@@ -89,6 +90,71 @@ async function createMatch(personB: any) {
         toast.add?.({ title: 'Failed to create match invite', color: 'error' })
     }
 }
+
+    let invitationSent = ref<any[]>([]);
+
+const getInvitationsSent = async () => {
+    const res = await fetch(`/match?idA=${user.value?.id}&status=INVITE`);
+    invitationSent.value = await res.json();
+
+    return invitationSent;
+}
+
+    let invitationReceived = ref<any[]>([]);
+
+const getInvitationsReceived = async () => {
+    const res = await fetch(`/match?idB=${user.value?.id}&status=INVITE`);
+    invitationReceived.value = await res.json();
+
+    return invitationReceived;
+}
+
+    let acceptedInvitations = ref<any[]>([]);
+
+const getAcceptedInvitations = async () => {
+    const res = await fetch(`/match?idB=${user.value?.id}&status=ACCEPTED`);
+    acceptedInvitations.value = await res.json();
+
+    return acceptedInvitations;
+}
+
+const acceptMatch = async (matchId: number) => {
+    console.log("Accepting match with ID:", matchId);
+    try {
+        await $fetch('/match/update', {
+            method: 'POST',
+            body: {
+                id: matchId,
+                status: 'ACCEPTED',
+            }
+        })
+
+        toast.add?.({ title: 'Match invite accepted', color: 'success' })
+        router.push('/dashboard') // or wherever your list page is
+    } catch (error) {
+        console.error(error)
+        toast.add?.({ title: 'Failed to accept match invite', color: 'error' })
+    }
+}
+
+const declineMatch = async (matchId: number) => {
+    try {
+        await $fetch('/match/update', {
+            method: 'POST',
+            body: {
+                id: matchId,
+                status: 'DECLINED',
+            }
+        })
+
+        toast.add?.({ title: 'Match invite declined', color: 'success' })
+        router.push('/dashboard') // or wherever your list page is
+    } catch (error) {
+        console.error(error)
+        toast.add?.({ title: 'Failed to decline match invite', color: 'error' })
+    }
+}
+
 </script>
 
 <template>
@@ -149,5 +215,109 @@ async function createMatch(personB: any) {
             </UCard>
         </div>
 
+    </div>
+    <div>
+        <div>
+        <UButton color="primary" variant="outline" block @click="getInvitationsSent()">
+            Invitations sent
+        </UButton>
+                <!-- Sent list -->
+        <div v-if="invitationSent && invitationSent.length" class="space-y-3">
+            <UCard v-for="s in invitationSent" :key="s.id" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                <template #header>
+                    <div class="flex items-center justify-between">
+                        <p class="font-semibold">
+                            {{ s.personB?.name }}
+                        </p>
+                    </div>
+                </template>
+
+                <div class="space-y-1 text-sm">
+                    <p>
+                        <span class="opacity-75">Trait Name:</span>
+                        <span class="font-mono ms-1">
+                            {{ s.skillA?.trait?.name }}
+                        </span>
+                    </p>
+                </div>
+            </UCard>
+        </div>
+
+        </div>
+        <div>
+        <UButton color="primary" variant="outline" block @click="getInvitationsReceived()">
+            Invitations received
+        </UButton>
+                <div v-if="invitationReceived && invitationReceived.length" class="space-y-3">
+            <UCard v-for="s in invitationReceived" :key="s.id" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                <template #header>
+                    <div class="flex items-center justify-between">
+                        <p class="font-semibold">
+                            {{ s.personA?.name }}
+                        </p>
+                    </div>
+                </template>
+
+                <div class="space-y-1 text-sm">
+                    <p>
+                        <span class="opacity-75">Trait Name:</span>
+                        <span class="font-mono ms-1">
+                            {{ s.skillA?.trait?.name }}
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    <UButton color="primary" variant="outline" block @click="acceptMatch(s.id)">
+                        Accept
+                    </UButton>
+                    <UButton color="error" variant="outline" block @click="declineMatch(s.id)">
+                        Decline
+                    </UButton>
+                </div>
+            </UCard>
+        </div>
+        </div>
+                <div>
+        <UButton color="primary" variant="outline" block @click="getAcceptedInvitations()">
+            Accepted Invitations
+        </UButton>
+                <div v-if="acceptedInvitations && acceptedInvitations.length" class="space-y-3">
+            <UCard v-for="s in acceptedInvitations" :key="s.id" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                <template #header>
+                    <div class="flex items-center justify-between">
+                        <p class="font-semibold">
+                            {{ s.personB?.name }}
+                        </p>
+                    </div>
+                </template>
+
+                <div class="space-y-1 text-sm">
+                    <p>
+                        <span class="opacity-75">Trait Name:</span>
+                        <span class="font-mono ms-1">
+                            {{ s.skillA?.trait?.name }}
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Title: {{ s.sessions[0]?.title }}
+                    </p>
+                    <p>
+                        Session Scheduled at: {{ new Date(s.sessions[0]?.scheduledAt).toLocaleString() }}
+                    </p>
+                    <p>
+                        Meeting URL: <a :href="s.sessions[0]?.url" target="_blank" class="text-blue-600 underline">{{ s.sessions[0]?.url }}</a>
+                    </p>
+                    <p>
+                        Status: {{ s.sessions[0]?.status }}
+                    </p>
+                    <p>
+                        Duration: {{ s.sessions[0]?.duration }} minutes
+                    </p>
+                </div>
+            </UCard>
+        </div>
+        </div>
     </div>
 </template>
