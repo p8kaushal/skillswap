@@ -65,11 +65,6 @@ const features = [
             Skill Swap makes it easy to create fair, transparent deals where both
             sides win.
           </p>
-
-          <UPageCard
-            :items="features"
-            icon="i-heroicons-check-circle"
-          />
         </div>
 
         <!-- Right: Tutorial video -->
