@@ -27,7 +27,7 @@ const features = [
 
 <template>
   <UPageCTA
-    title="Swill Swap"
+    title="Skill Swap"
     description="Learn new skills by teaching your own skills to others."
     orientation="horizontal"
     :links="links"
@@ -47,7 +47,7 @@ const features = [
         <!-- Left: About text -->
         <div class="space-y-6">
           <UBadge color="primary" variant="soft">
-            About Swill Swap
+            About Skill Swap
           </UBadge>
 
           <h2 class="text-3xl font-semibold">
@@ -55,28 +55,23 @@ const features = [
           </h2>
 
           <p class="text-gray-500 dark:text-gray-400">
-            Swill Swap is a peer‑to‑peer platform that lets people exchange skills
+            Skill Swap is a peer‑to‑peer platform that lets people exchange skills
             and services without traditional payments. Users match what they can
             offer with what they want to learn or get done.
           </p>
 
           <p class="text-gray-500 dark:text-gray-400">
             From design for development to language lessons for marketing help,
-            Swill Swap makes it easy to create fair, transparent deals where both
+            Skill Swap makes it easy to create fair, transparent deals where both
             sides win.
           </p>
-
-          <UPageCard
-            :items="features"
-            icon="i-heroicons-check-circle"
-          />
         </div>
 
         <!-- Right: Tutorial video -->
         <div class="space-y-4">
           <UCard>
             <h3 class="text-xl font-semibold mb-2">
-              Watch how Swill Swap works
+              Watch how Skill Swap works
             </h3>
             <p class="text-gray-500 dark:text-gray-400 mb-4">
               This short walkthrough shows how to create your profile, find matches,
@@ -88,7 +83,7 @@ const features = [
               <iframe
                 class="absolute inset-0 w-full h-full"
                 src="https://www.youtube.com/embed/VIDEO_ID"
-                title="Swill Swap tutorial"
+                title="Skill Swap tutorial"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
