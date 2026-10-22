@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { get } from 'http'
 import { ref } from 'vue'
-import type { an } from 'vue-router/dist/router-CWoNjPRp.mjs'
-import person from '~~/server/routes/person'
 const { data, getSession } = useAuth()
 
 
