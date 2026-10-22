@@ -10,6 +10,9 @@ jobs:
   build:
     name: Build & Verify
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/skillswap_test"
+      NUXT_AUTH_SECRET: "ci-secret-for-build-step-only"
 
     steps:
       - name: Checkout code
@@ -18,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install dependencies
@@ -29,6 +32,3 @@ jobs:
 
       - name: Build project
         run: npm run build
-        env:
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/test"
-          NUXT_AUTH_SECRET: "ci-secret-for-build-step-only"
