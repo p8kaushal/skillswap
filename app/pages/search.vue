@@ -240,6 +240,14 @@ const declineMatch = async (matchId: number) => {
                         </span>
                     </p>
                 </div>
+                <div class="space-y-1 text-sm">
+                    <p>
+                        <span class="opacity-75">Email Address:</span>
+                        <span class="font-mono ms-1">
+                            {{ s.personB?.email }}
+                        </span>
+                    </p>
+                </div>
             </UCard>
         </div>
 
@@ -263,6 +271,14 @@ const declineMatch = async (matchId: number) => {
                         <span class="opacity-75">Trait Name:</span>
                         <span class="font-mono ms-1">
                             {{ s.skillA?.trait?.name }}
+                        </span>
+                    </p>
+                </div>
+                <div class="space-y-1 text-sm">
+                    <p>
+                        <span class="opacity-75">Email Address:</span>
+                        <span class="font-mono ms-1">
+                            {{ s.personA?.email }}
                         </span>
                     </p>
                 </div>
@@ -296,6 +312,14 @@ const declineMatch = async (matchId: number) => {
                         <span class="opacity-75">Trait Name:</span>
                         <span class="font-mono ms-1">
                             {{ s.skillA?.trait?.name }}
+                        </span>
+                    </p>
+                </div>
+                <div class="space-y-1 text-sm">
+                    <p>
+                        <span class="opacity-75">Email Address:</span>
+                        <span class="font-mono ms-1">
+                            {{ s.personA?.email }}
                         </span>
                     </p>
                 </div>

@@ -1,307 +1,175 @@
-# Fullstack Example with Nuxt & Prisma Postgres (REST API)
+# SkillSwap 🔄
 
-This example shows how to implement a **fullstack app with [Nuxt](https://nuxtjs.org//)** using [Vue](https://vuejs.org/) (frontend) and [Prisma Client](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client) (backend). It uses a [Prisma Postgres](https://www.prisma.io/postgres) database.
+A modern peer-to-peer skill exchange platform connecting individuals to swap skills, knowledge, and services without monetary transactions. Exchange what you know for what you need—from programming and design to languages and marketing.
 
-## Getting started
+---
 
-### 1. Download example and navigate into the project directory
+## 🚀 Overview
 
-Use the `try-prisma` CLI to download this example:
+**SkillSwap** is a fullstack web platform built on **Nuxt 4**, **Vue 3**, and **Prisma ORM**. It enables community members to:
+- **Showcase Talents & Needs**: Create detailed user profiles listing skills you possess (`has`) and skills you want to learn (`want`), categorized with proficiency levels (Beginner, Intermediate, Expert).
+- **Intelligent Peer Matching**: Match users who have complementary skill sets (what Person A teaches and wants matches what Person B can offer).
+- **Session Scheduling**: Coordinate and manage learning/swap sessions directly within the platform with meeting links, durations, and agenda notes.
+- **Secure Authentication**: Built-in credential-based authentication powered by `@sidebase/nuxt-auth`, JWT tokens, and bcrypt hashing with role-based access control (Admin & User).
 
-```terminal
-npx try-prisma@latest --template orm/nuxt --install npm --name nuxt
+---
+
+## 🛠️ Tech Stack
+
+### Frontend & Framework
+- **[Nuxt 4](https://nuxt.com/)** (`^4.1.2`) - The Intuitive Vue Framework (SSR/SSG/SPA hybrid).
+- **[Vue 3](https://vuejs.org/)** (`^3.5.22`) - Composition API and `<script setup>` syntax.
+- **[Nuxt UI](https://ui.nuxt.com/)** (`^4.3.0`) - Tailwind-powered UI component library.
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first styling framework.
+- **[Lucide Icons](https://lucide.dev/)** - Clean, modern SVG icon set.
+
+### Backend & API
+- **[Nitro](https://nitro.unjs.io/)** - High-performance server engine powering Nuxt API routes.
+- **[Prisma ORM](https://www.prisma.io/)** (`^7.0.0`) - Type-safe database client and schema migrations.
+- **[PostgreSQL](https://www.postgresql.org/)** (`pg` `^8.16.3` / `@prisma/adapter-pg`) - Relational database layer.
+
+### Authentication & Security
+- **[@sidebase/nuxt-auth](https://auth.sidebase.io/)** (`^1.1.1`) - Authentication module for Nuxt applications.
+- **[JSON Web Tokens (JWT)](https://jwt.io/)** (`jsonwebtoken` `^9.0.3`) - Stateless token-based session management.
+- **[bcrypt](https://www.npmjs.com/package/bcrypt)** (`^6.0.0`) - Salted password hashing.
+- **[Zod](https://zod.dev/)** (`^4.2.1`) - TypeScript-first schema declaration and validation.
+
+### Tooling & Quality
+- **[TypeScript](https://www.typescriptlang.org/)** - Static type checking.
+- **[ESLint](https://eslint.org/)** (`@nuxt/eslint` `^1.9.0`, ESLint 9) - Linting and formatting rules.
+
+---
+
+## 📂 Project Structure
+
+```text
+skillswap/
+├── app/
+│   ├── assets/           # CSS stylesheets and static assets
+│   ├── components/       # Reusable Vue components (Header, Footer, Skill, Person, Trait)
+│   ├── layouts/          # Nuxt layouts
+│   ├── middleware/       # Route guards (auth, admin)
+│   ├── pages/            # File-based routing (index, login, signup, dashboard, search, etc.)
+│   └── utils/            # Client-side utility functions (api.ts)
+├── prisma/
+│   ├── schema.prisma     # Prisma database models (Person, Skill, Trait, Match, Session)
+│   ├── seed.ts           # Initial sample data seeder
+│   └── migrations/       # Version-controlled database migration history
+├── server/
+│   ├── api/
+│   │   └── auth/         # Nuxt Auth authentication endpoints (login, signup, session)
+│   └── routes/           # REST API endpoints (feed, match, person, skill, trait)
+├── nuxt.config.ts        # Nuxt configuration and module settings
+├── package.json          # Dependencies, scripts, and package metadata
+├── .env.example          # Template for required environment variables
+├── .gitignore            # Git ignore specification
+└── LICENSE               # MIT License
 ```
 
-Then, navigate into the project directory:
+---
 
-```terminal
-cd nuxt
+## ⚡ Getting Started
+
+### Prerequisites
+
+Ensure you have installed:
+- **Node.js**: `v18.20.0+` or `v20.9.0+` (recommended)
+- **npm**, **pnpm**, or **yarn**
+- **PostgreSQL**: Local PostgreSQL instance, Docker container, or cloud database (e.g., Prisma Postgres, Supabase, Neon)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/p8kaushal/skillswap.git
+cd skillswap
 ```
 
-<details><summary><strong>Alternative:</strong> Clone the entire repo</summary>
+### 2. Install Dependencies
 
-Clone this repository:
-
-```
-git clone git@github.com:prisma/prisma-examples.git --depth=1
-```
-
-Install npm dependencies:
-
-```
-cd prisma-examples/orm/nuxt
+```bash
 npm install
 ```
 
-</details>
+### 3. Configure Environment Variables
 
-### 2. Create and seed the database
+Copy the example `.env` file and customize the variables:
 
-Create a new [Prisma Postgres](https://www.prisma.io/docs/postgres/overview) database by executing:
-
-```terminal
-npx prisma init --db
-```
-
-If you don't have a [Prisma Data Platform](https://console.prisma.io/) account yet, or if you are not logged in, the command will prompt you to log in using one of the available authentication providers. A browser window will open so you can log in or create an account. Return to the CLI after you have completed this step.
-
-Once logged in (or if you were already logged in), the CLI will prompt you to:
-1. Select a **region** (e.g. `us-east-1`)
-1. Enter a **project name**
-
-After successful creation, you will see output similar to the following:
-
-<details>
-
-<summary>CLI output</summary>
-
-```terminal
-Let's set up your Prisma Postgres database!
-? Select your region: ap-northeast-1 - Asia Pacific (Tokyo)
-? Enter a project name: testing-migration
-✔ Success! Your Prisma Postgres database is ready ✅
-
-We found an existing schema.prisma file in your current project directory.
-
---- Database URL ---
-
-Connect Prisma ORM to your Prisma Postgres database with this URL:
-
-postgres://<username>:<password>@<host>:<port>/<database>
-
---- Next steps ---
-
-Go to https://pris.ly/ppg-init for detailed instructions.
-
-Use the @prisma/adapter-pg driver adapter and configure your Prisma Client instance:
 ```bash
-npm install @prisma/adapter-pg
-```
-```ts
-import { PrismaPg } from '@prisma/adapter-pg'
-const pool = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
-const prisma = new PrismaClient({ adapter: pool })
+cp .env.example .env
 ```
 
-2. Apply migrations
-Run the following command to create and apply a migration:
+Edit `.env` with your database credentials and authentication secret:
+
+```env
+# Database connection string (PostgreSQL)
+DATABASE_URL="postgresql://postgres:password@localhost:5432/skillswap?sslmode=disable"
+
+# Application URL
+NUXT_PUBLIC_API_URL="http://localhost:3000/api"
+
+# Nuxt Auth Secret (generate a strong random secret)
+NUXT_AUTH_SECRET="your-strong-random-secret"
+```
+
+### 4. Database Setup & Migrations
+
+Run database migrations to generate the database tables:
+
+```bash
 npx prisma migrate dev
-
-3. Manage your data
-View and edit your data locally by running this command:
-npx prisma studio
-
-...or online in Console:
-https://console.prisma.io/{workspaceId}/{projectId}/studio
-
-4. Send queries from your app
-If you already have an existing app with Prisma ORM, you can now run it and it will send queries against your newly created Prisma Postgres instance.
-
-5. Learn more
-For more info, visit the Prisma Postgres docs: https://pris.ly/ppg-docs
 ```
 
-</details>
-
-Locate and copy the database URL provided in the CLI output. Then, create a `.env` file in the project root:
+Generate the Prisma Client types:
 
 ```bash
-touch .env
-```
-
-Now, paste the URL into it as a value for the `DATABASE_URL` environment variable. For example:
-
-```bash
-# .env
-DATABASE_URL=postgres://<username>:<password>@<host>:<port>/<database>
-```
-
-Generate the Prisma client:
-
-```terminal
 npx prisma generate
 ```
 
-Run the following command to create tables in your database. This creates the `User` and `Post` tables that are defined in [`prisma/schema.prisma`](./prisma/schema.prisma):
+*(Optional)* Seed the database with sample traits, skills, and users:
 
-```terminal
-npx prisma migrate dev --name init
-```
-
-Execute the seed file in [`prisma/seed.ts`](./prisma/seed.ts) to populate your database with some sample data, by running:
-
-```terminal
+```bash
 npx prisma db seed
 ```
 
-### 3. Start the app
+*(Optional)* Open Prisma Studio to inspect and edit database records visually:
 
+```bash
+npx prisma studio
 ```
+
+### 5. Launch Development Server
+
+Start the local Nuxt development server:
+
+```bash
 npm run dev
 ```
 
-The app is now running, navigate to [`http://localhost:3000/`](http://localhost:3000/) in your browser to explore its UI.
+Open your browser and navigate to **[http://localhost:3000](http://localhost:3000)**.
 
-<details><summary>Expand for a tour through the UI of the app</summary>
+---
 
-<br />
+## 📜 Available Scripts
 
-**Blog** (located in [`./app/pages/index.vue`](./app/pages/index.vue)
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Starts the Nuxt development server with HMR on `http://localhost:3000` |
+| `npm run build` | Builds the application for production deployment |
+| `npm run preview` | Locally preview the production build output |
+| `npm run generate` | Pre-renders all static routes of the application |
+| `npx prisma migrate dev` | Applies database migrations in development |
+| `npx prisma studio` | Launches the interactive Prisma database GUI |
 
-![](https://imgur.com/eepbOUO.png)
+---
 
-**Signup** (located in [`./app/pages/signup.vue`](./app/pages/signup.vue))
+## 🔒 Security & Best Practices
 
-![](https://imgur.com/iE6OaBI.png)
+- **Never commit `.env` files**: All secrets, database URLs, and session tokens are strictly ignored via `.gitignore`.
+- **Stateless Tokens**: Authentication uses secure JWT tokens sent via Bearer headers.
+- **Hashed Passwords**: User passwords are encrypted using `bcrypt` before storage.
 
-**Create post (draft)** (located in [`./app/pages/create.vue`](./app/pages/create.vue))
+---
 
-![](https://imgur.com/olCWRNv.png)
+## 📄 License
 
-**Drafts** (located in [`./app/pages/drafts.vue`](./app/pages/drafts.vue))
-
-![](https://imgur.com/PSMzhcd.png)
-
-**View post** (located in [`./app/pages/p/[id].vue`](./app/pages/p/[id].vue)) (delete or publish here)
-
-![](https://imgur.com/zS1B11O.png)
-
-</details>
-
-## Using the REST API
-
-You can also access the REST API of the API server directly. It is running on the same host machine and port and can be accessed via the `/api` route (in this case that is `localhost:3000/api/`, so you can e.g. reach the API with [`localhost:3000/api/feed`](http://localhost:3000/api/feed)).
-
-### `GET`
-
-- `/api/post/:id`: Fetch a single post by its `id`
-- `/api/feed`: Fetch all _published_ posts
-- `/api/filterPosts?searchString={searchString}`: Filter posts by `title` or `content`
-
-### `POST`
-
-- `/api/post`: Create a new post
-  - Body:
-    - `title: String` (required): The title of the post
-    - `content: String` (optional): The content of the post
-    - `authorEmail: String` (required): The email of the user that creates the post
-- `/api/user`: Create a new user
-  - Body:
-    - `email: String` (required): The email address of the user
-    - `name: String` (optional): The name of the user
-
-### `PUT`
-
-- `/api/publish/:id`: Publish a post by its `id`
-
-### `DELETE`
-
-- `/api/post/:id`: Delete a post by its `id`
-
-## Switch to another database (e.g. SQLite, MySQL, SQL Server, MongoDB)
-
-If you want to try this example with another database than PostgreSQL, you can adjust the database connection in [`prisma/schema.prisma`](./prisma/schema.prisma) by reconfiguring the `datasource` block.
-
-Learn more about the different connection configurations in the [docs](https://www.prisma.io/docs/reference/database-reference/connection-urls).
-
-<details><summary>Expand for an overview of example configurations with different databases</summary>
-
-### Remove the Prisma Client extension
-
-Before you proceed to use your own database, you should remove the Prisma client extension required for Prisma Postgres:
-
-```terminal
-npm uninstall @prisma/extension-accelerate
-```
-
-Remove the client extension from your `PrismaClient` instance:
-
-```diff
-- const prisma = new PrismaClient().$extends(withAccelerate())
-+ const prisma = new PrismaClient()
-```
-
-### Your own PostgreSQL database
-
-To use your own PostgreSQL database remove the `@prisma/extension-accelerate` package and remove the Prisma client extension.
-
-### SQLite
-
-Modify the `provider` value in the `datasource` block in the [`prisma.schema`](./prisma/schema.prisma) file:
-
-```prisma
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
-```
-
-Create an `.env` file and add the SQLite database connection string in it. For example:
-
-```terminal
-DATABASE_URL="file:./dev.db""
-```
-
-### MySQL
-
-Modify the `provider` value in the `datasource` block in the [`prisma.schema`](./prisma/schema.prisma) file:
-
-```prisma
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
-```
-
-Create an `.env` file and add a MySQL database connection string in it. For example:
-
-```terminal
-## This is a placeholder url
-DATABASE_URL="mysql://janedoe:mypassword@localhost:3306/notesapi"
-```
-
-### Microsoft SQL Server
-
-Modify the `provider` value in the `datasource` block in the [`prisma.schema`](./prisma/schema.prisma) file:
-
-```prisma
-datasource db {
-  provider = "sqlserver"
-  url      = env("DATABASE_URL")
-}
-```
-
-Create an `.env` file and add a Microsoft SQL Server database connection string in it. For example:
-
-```terminal
-## This is a placeholder url
-DATABASE_URL="sqlserver://localhost:1433;initial catalog=sample;user=sa;password=mypassword;"
-```
-
-### MongoDB
-
-Modify the `provider` value in the `datasource` block in the [`prisma.schema`](./prisma/schema.prisma) file:
-
-```prisma
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
-}
-```
-
-Create an `.env` file and add a local MongoDB database connection string in it. For example:
-
-```terminal
-## This is a placeholder url
-DATABASE_URL="mongodb://USERNAME:PASSWORD@HOST/DATABASE?authSource=admin&retryWrites=true&w=majority"
-```
-
-</details>
-
-## Resources
-
-- Check out the [Prisma docs](https://www.prisma.io/docs)
-- [Join our community on Discord](https://pris.ly/discord?utm_source=github&utm_medium=prisma_examples&utm_content=next_steps_section) to share feedback and interact with other users.
-- [Subscribe to our YouTube channel](https://pris.ly/youtube?utm_source=github&utm_medium=prisma_examples&utm_content=next_steps_section) for live demos and video tutorials.
-- [Follow us on X](https://pris.ly/x?utm_source=github&utm_medium=prisma_examples&utm_content=next_steps_section) for the latest updates.
-- Report issues or ask [questions on GitHub](https://pris.ly/github?utm_source=github&utm_medium=prisma_examples&utm_content=next_steps_section).
+This project is licensed under the [MIT License](LICENSE) © 2026 Parth Kaushal.
